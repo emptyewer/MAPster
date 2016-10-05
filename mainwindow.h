@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void Run();
+    void setupPaths();
+    void setupViews();
 };
 
 #endif // MAINWINDOW_H
