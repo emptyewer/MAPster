@@ -31,20 +31,47 @@
       </property>
       <widget class="QWidget" name="main_tab">
        <attribute name="title">
-        <string>File</string>
+        <string>Files</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="system_folders_label">
+            <property name="text">
+             <string>Folders</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="system_files_label">
+            <property name="text">
+             <string>Files</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item>
          <widget class="QSplitter" name="splitter">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
           <widget class="QTreeView" name="folder_tree">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
            </property>
            <property name="dragEnabled">
             <bool>true</bool>
@@ -55,67 +82,161 @@
            <property name="defaultDropAction">
             <enum>Qt::CopyAction</enum>
            </property>
-          </widget>
-          <widget class="QListView" name="files1_list">
-           <property name="acceptDrops">
+           <property name="alternatingRowColors">
             <bool>true</bool>
            </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
-           </property>
-           <property name="lineWidth">
-            <number>3</number>
-           </property>
-           <property name="dragDropMode">
-            <enum>QAbstractItemView::DropOnly</enum>
-           </property>
-          </widget>
-          <widget class="QListView" name="files2_list">
-           <property name="acceptDrops">
+           <property name="uniformRowHeights">
             <bool>true</bool>
            </property>
+           <property name="animated">
+            <bool>true</bool>
+           </property>
+           <attribute name="headerVisible">
+            <bool>false</bool>
+           </attribute>
+          </widget>
+          <widget class="QListView" name="file_list">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
            <property name="frameShape">
-            <enum>QFrame::Box</enum>
+            <enum>QFrame::StyledPanel</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
+            <enum>QFrame::Raised</enum>
            </property>
            <property name="lineWidth">
-            <number>3</number>
+            <number>1</number>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragEnabled">
+            <bool>false</bool>
            </property>
            <property name="dragDropMode">
-            <enum>QAbstractItemView::DropOnly</enum>
+            <enum>QAbstractItemView::DragOnly</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
            </property>
           </widget>
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="selected_files1_label">
+            <property name="text">
+             <string>Selected Files (Set 1)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="selected_files2_label">
+            <property name="text">
+             <string>Selected Files (Set 2)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="VListWidget" name="selected_files_list1">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>168</height>
+             </size>
+            </property>
+            <property name="acceptDrops">
+             <bool>true</bool>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="showDropIndicator" stdset="0">
+             <bool>true</bool>
+            </property>
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+            <property name="defaultDropAction">
+             <enum>Qt::MoveAction</enum>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="VListWidget" name="selected_files_list2">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>168</height>
+             </size>
+            </property>
+            <property name="acceptDrops">
+             <bool>true</bool>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+            <property name="defaultDropAction">
+             <enum>Qt::MoveAction</enum>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="main_parameters_group">
           <property name="minimumSize">
            <size>
             <width>0</width>
             <height>200</height>
            </size>
           </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>200</height>
+           </size>
+          </property>
           <property name="title">
-           <string>Parameters</string>
+           <string>Basic Parameters</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
            <item row="1" column="0">
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="genome_label">
              <property name="minimumSize">
               <size>
                <width>100</width>
-               <height>0</height>
+               <height>20</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
                <width>150</width>
-               <height>16777215</height>
+               <height>20</height>
               </size>
              </property>
              <property name="text">
@@ -126,6 +247,79 @@
              </property>
             </widget>
            </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="pairwise_label">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Pairwise</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <layout class="QHBoxLayout" name="pairwise_layout">
+             <item>
+              <widget class="QGroupBox" name="pairwise_group">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>45</height>
+                </size>
+               </property>
+               <property name="title">
+                <string/>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+               <property name="checkable">
+                <bool>false</bool>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <property name="spacing">
+                 <number>-1</number>
+                </property>
+                <property name="leftMargin">
+                 <number>12</number>
+                </property>
+                <item>
+                 <widget class="QRadioButton" name="pairwise_on">
+                  <property name="text">
+                   <string>On</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="pairwise_off">
+                  <property name="text">
+                   <string>Off</string>
+                  </property>
+                  <property name="checked">
+                   <bool>false</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
            <item row="1" column="1">
             <widget class="QComboBox" name="comboBox"/>
            </item>
@@ -133,7 +327,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QProgressBar" name="progressBar">
+         <widget class="QProgressBar" name="progress_bar">
           <property name="value">
            <number>24</number>
           </property>
@@ -144,7 +338,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="second_tab">
        <attribute name="title">
         <string>Tab 2</string>
        </attribute>
@@ -166,6 +360,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>VListWidget</class>
+   <extends>QListWidget</extends>
+   <header>vlistwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
