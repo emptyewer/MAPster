@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>940</width>
+    <width>1024</width>
     <height>700</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>940</width>
+    <width>1024</width>
     <height>700</height>
    </size>
   </property>
@@ -38,6 +38,12 @@
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <widget class="QLabel" name="system_folders_label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16</height>
+             </size>
+            </property>
             <property name="text">
              <string>Folders</string>
             </property>
@@ -45,6 +51,12 @@
           </item>
           <item>
            <widget class="QLabel" name="system_files_label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16</height>
+             </size>
+            </property>
             <property name="text">
              <string>Files</string>
             </property>
@@ -136,15 +148,27 @@
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QLabel" name="selected_files1_label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Selected Files (Set 1)</string>
+             <string>Paired Reads (Set 1)</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="selected_files2_label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Selected Files (Set 2)</string>
+             <string>Paired Reads (Set 2)</string>
             </property>
            </widget>
           </item>
@@ -225,6 +249,22 @@
            <string>Basic Parameters</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
+           <item row="2" column="0">
+            <widget class="QLabel" name="label">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string># Threads</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="genome_label">
              <property name="minimumSize">
@@ -247,29 +287,10 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="pairwise_label">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Pairwise</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
+           <item row="1" column="2">
+            <widget class="QComboBox" name="genome_box"/>
            </item>
-           <item row="0" column="1">
+           <item row="0" column="2">
             <layout class="QHBoxLayout" name="pairwise_layout">
              <item>
               <widget class="QGroupBox" name="pairwise_group">
@@ -320,8 +341,37 @@
              </item>
             </layout>
            </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="comboBox"/>
+           <item row="0" column="0">
+            <widget class="QLabel" name="pairwise_label">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Pairwise</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QSpinBox" name="spinBox">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>16</number>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -352,12 +402,113 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>940</width>
+     <width>1024</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="minimumSize">
+    <size>
+     <width>400</width>
+     <height>193</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>400</width>
+     <height>524287</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>Queue</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QTableWidget" name="tableWidget">
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="columnCount">
+        <number>2</number>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderStretchLastSection">
+        <bool>false</bool>
+       </attribute>
+       <row>
+        <property name="text">
+         <string>New Row</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>New Row</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>Status</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Add to Queue</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Run</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

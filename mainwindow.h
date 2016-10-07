@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include <QFileSystemModel>
-#include <QListWidget>
+#include "mystructs.h"
+#include <QVector>
 
 namespace Ui {
 class MainWindow;
@@ -31,11 +32,11 @@ private:
     void setupViews();
     void create_documents_folder();
     void make_directory(QString path);
-    void get_genome_list();
+    void add_to_genome_box(genome g);
 
     QFileSystemModel *drivesModel;
     QFileSystemModel *filesModel;
-    QListWidget *selected_listWidget;
+    QVector<genome> genomes_list;
 };
 
 #endif // MAINWINDOW_H

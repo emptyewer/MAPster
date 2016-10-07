@@ -1,0 +1,12 @@
+<organisms>
+    <organism species="Homo sapiens">
+        <name>Ensembl GRCh38</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38.tar.gz</url>
+    </organism>
+    <organism species="Homo sapiens">
+        <name>Ensembl GRCh38</name>
+        <type>genome + snp</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38_snp.tar.gz</url>
+    </organism>
+</organisms>
