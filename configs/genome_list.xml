@@ -1,4 +1,14 @@
 <organisms>
+    <organism species="Drosophila melanogaster">
+        <name>Ensembl BDGP6</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/bdgp6.tar.gz</url>
+    </organism>
+    <organism species="Drosophila melanogaster">
+        <name>Ensembl BDGP6</name>
+        <type>genome + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/bdgp6_tran.tar.gz</url>
+    </organism>
     <organism species="Homo sapiens">
         <name>Ensembl GRCh38</name>
         <type>genome</type>
@@ -8,5 +18,10 @@
         <name>Ensembl GRCh38</name>
         <type>genome + snp</type>
         <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38_snp.tar.gz</url>
+    </organism>
+    <organism species="Test melanogaster">
+        <name>Ensembl BDGP6</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/bdgp6.tar.gz</url>
     </organism>
 </organisms>

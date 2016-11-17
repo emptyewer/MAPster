@@ -6,20 +6,36 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network xml
+
+DEFINES  += QT_NO_SSL
 
 TARGET = MAPster
 TEMPLATE = app
 
+ICON = Icon.icns
+
 SOURCES += main.cpp\
         mainwindow.cpp \
-    vlistwidget.cpp \
-    XMLDomDocument.cpp
+    xml/XMLDomDocument.cpp \
+    download/downloadmanager.cpp \
+    download/downloadmanagerFTP.cpp \
+    download/downloadmanagerHTTP.cpp \
+    download/downloadlist.cpp \
+    helpers/files.cpp \
+    helpers/vlistwidget.cpp
 
 HEADERS  += mainwindow.h \
     vlistwidget.h \
-    XMLDomDocument.h \
-    mystructs.h
+    xml/XMLDomDocument.h \
+    download/downloadmanager.h \
+    download/downloadmanagerFTP.h \
+    download/downloadmanagerHTTP.h \
+    download/downloadlist.h \
+    helpers/files.h \
+    helpers/keys.h \
+    helpers/mystructs.h \
+    helpers/vlistwidget.h \
 
 FORMS    += mainwindow.ui
 
@@ -36,13 +52,6 @@ macx {
 
     QMAKE_EXTRA_TARGETS += first copydata copyconfigs
 }
-
-macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/curl/7.50.1/lib/ -lcurl
-
-INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/curl/7.50.1/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/curl/7.50.1/include
-
-macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/curl/7.50.1/lib/libcurl.a
 
 macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/lib/ -lxerces-c
 
