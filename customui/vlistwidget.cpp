@@ -1,5 +1,4 @@
 #include "vlistwidget.h"
-
 #include <QDebug>
 #include <QDrag>
 #include <QDragEnterEvent>

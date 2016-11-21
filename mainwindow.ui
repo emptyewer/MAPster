@@ -523,7 +523,7 @@
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QTableWidget" name="tableWidget">
+      <widget class="QTableWidget" name="jobs_table">
        <property name="alternatingRowColors">
         <bool>true</bool>
        </property>
@@ -562,7 +562,7 @@
        </column>
        <column>
         <property name="text">
-         <string>Name</string>
+         <string>Output Name</string>
         </property>
        </column>
       </widget>
@@ -623,7 +623,7 @@
   <customwidget>
    <class>VListWidget</class>
    <extends>QListWidget</extends>
-   <header>vlistwidget.h</header>
+   <header>customui/vlistwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

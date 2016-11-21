@@ -21,21 +21,23 @@ SOURCES += main.cpp\
     download/downloadmanager.cpp \
     download/downloadmanagerFTP.cpp \
     download/downloadmanagerHTTP.cpp \
-    download/downloadlist.cpp \
     helpers/files.cpp \
-    helpers/vlistwidget.cpp
+    customui/vlistwidget.cpp \
+    helpers/runqueue.cpp \
+    customui/uielements.cpp
 
 HEADERS  += mainwindow.h \
-    vlistwidget.h \
     xml/XMLDomDocument.h \
     download/downloadmanager.h \
     download/downloadmanagerFTP.h \
     download/downloadmanagerHTTP.h \
-    download/downloadlist.h \
     helpers/files.h \
     helpers/keys.h \
     helpers/mystructs.h \
-    helpers/vlistwidget.h \
+    customui/vlistwidget.h \
+    helpers/includes.h \
+    helpers/runqueue.h \
+    customui/uielements.h
 
 FORMS    += mainwindow.ui
 
@@ -66,3 +68,15 @@ INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/include/
 DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/include/
 
 macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/lib/libboost_container.a
+
+macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/lib/ -larchive
+
+INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/include
+DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/include
+
+macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/lib/libarchive.a
+
+DISTFILES += \
+    images/done.png \
+    images/running.png \
+    images/waiting.png

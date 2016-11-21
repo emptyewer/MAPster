@@ -1,86 +1,118 @@
 #include "files.h"
 
-files::files()
-{
-    documents_dir = QStandardPaths::locate(QStandardPaths::DocumentsLocation,
-                                           QString(), QStandardPaths::LocateDirectory);
+files::files() {
+  documents_dir =
+      QStandardPaths::locate(QStandardPaths::DocumentsLocation, QString(),
+                             QStandardPaths::LocateDirectory);
+}
+
+QString files::get_genome_filepath(genome g) {
+  QString mapster_genomes_dir = get_mapster_genomes_dir();
+  QString gfn = QDir(mapster_genomes_dir).filePath(get_genome_filename(g));
+  return gfn;
 }
 
 QString files::get_genome_filename(genome g) {
-    QString mapster_genomes_dir = get_mapster_genomes_dir();
-    QFileInfo fileInfo(g.url.toString());
-    QString gfn = QDir(mapster_genomes_dir).filePath(fileInfo.fileName());
-    return gfn;
+  QFileInfo fileInfo(g.url.toString());
+  return fileInfo.fileName();
 }
 
 QString files::get_mapster_dir() {
-    return QDir(documents_dir).filePath("MAPster Files");
+  return QDir(documents_dir).filePath("MAPster Files");
 }
 
 QString files::get_mapster_genomes_dir() {
-    QString mapster_dir = get_mapster_dir();
-    return QDir(mapster_dir).filePath("Genomes");
+  QString mapster_dir = get_mapster_dir();
+  return QDir(mapster_dir).filePath("Genomes");
 }
 
 QString files::get_mapster_queues_dir() {
-    QString mapster_dir = get_mapster_dir();
-    return QDir(mapster_dir).filePath("Queues");
+  QString mapster_dir = get_mapster_dir();
+  return QDir(mapster_dir).filePath("Queues");
 }
 
 QString files::get_mapster_configs_dir() {
-    QString mapster_dir = get_mapster_dir();
-    return QDir(mapster_dir).filePath("Configs");
+  QString mapster_dir = get_mapster_dir();
+  return QDir(mapster_dir).filePath("Configs");
 }
 
-QString files::get_genome_url(genome g) {
-    return g.url.toString();
-}
+QString files::get_genome_url(genome g) { return g.url.toString(); }
 
-void files::make_directory(QString path)
-{
-    if (!QDir(path).exists())
-    {
-        QDir().mkpath(path);
-    }
+void files::make_directory(QString path) {
+  if (!QDir(path).exists()) {
+    QDir().mkpath(path);
+  }
 }
 
 void files::create_documents_folder() {
-    make_directory(get_mapster_dir());
-    make_directory(get_mapster_configs_dir());
-    make_directory(get_mapster_queues_dir());
-    make_directory(get_mapster_genomes_dir());
+  make_directory(get_mapster_dir());
+  make_directory(get_mapster_configs_dir());
+  make_directory(get_mapster_queues_dir());
+  make_directory(get_mapster_genomes_dir());
+}
+
+void files::untar_files_mac(genome g) {
+  QString command = "tar xvfz \"" + get_genome_filepath(g) +"\" -C \"" + get_mapster_genomes_dir() + "\"" ;
+  string command_str = command.toStdString();
+  system(command_str.c_str());
+}
+
+void files::extract(const char *filename) {
+  struct archive *a = nullptr;
+  struct archive_entry *entry = nullptr;
+  int r;
+  QString path_qstring = get_mapster_genomes_dir();
+  string s = path_qstring.toStdString();
+
+  a = archive_read_new();
+  archive_read_support_filter_all(a);
+  archive_read_support_format_all(a);
+  archive_entry_set_pathname(entry, s.c_str());
+
+  qDebug() << *filename;
+  r = archive_read_open_filename(a, filename, 10240); // Note 1
+  if (r != ARCHIVE_OK)
+    exit(1);
+  while (archive_read_next_header(a, &entry) == ARCHIVE_OK) {
+    printf("%s\\n",archive_entry_pathname(entry));
+    archive_read_data_skip(a);  // Note 2
+  }
+  r = archive_read_free(a);  // Note 3
 }
 
 QVector<genome> files::get_genomes_list() {
-    QString appdir = QCoreApplication::applicationDirPath();
-    QString appdir_configsdir = QDir(appdir).filePath("configs");
-    QString xml_file = QDir(appdir_configsdir).filePath("genome_list.xml");
-    std::string str = xml_file.toStdString();
-    const char* p = str.c_str();
-    QVector<genome> genomes_list;
-    string value;
-    XmlDomDocument* doc = new XmlDomDocument(p);
-    if (doc) {
-        for (int i = 0; i < doc->getChildCount("organisms", 0, "organism"); i++) {
-            genome temp;
+  QString appdir = QCoreApplication::applicationDirPath();
+  QString appdir_configsdir = QDir(appdir).filePath("configs");
+  QString xml_file = QDir(appdir_configsdir).filePath("genome_list.xml");
+  std::string str = xml_file.toStdString();
+  const char *p = str.c_str();
+  QVector<genome> genomes_list;
+  string value;
+  XmlDomDocument *doc = new XmlDomDocument(p);
+  if (doc) {
+    for (int i = 0; i < doc->getChildCount("organisms", 0, "organism"); i++) {
+      genome temp;
+      temp.index = i;
 
-            temp.index = i;
+      value = doc->getChildAttribute("organisms", 0, "organism", i, "species");
+      temp.species = value.c_str();
 
-            value = doc->getChildAttribute("organisms", 0, "organism", i, "species");
-            temp.species = value.c_str();
+      value = doc->getChildValue("organism", i, "name", 0);
+      temp.name = value.c_str();
 
-            value = doc->getChildValue("organism", i, "name", 0 );
-            temp.name = value.c_str();
+      value = doc->getChildValue("organism", i, "type", 0);
+      temp.type = value.c_str();
 
-            value = doc->getChildValue("organism", i, "type", 0 );
-            temp.type = value.c_str();
+      value = doc->getChildValue("organism", i, "url", 0);
+      QUrl _url(value.c_str());
+      temp.url = _url;
 
-            value = doc->getChildValue("organism", i, "url", 0 );
-            QUrl _url(value.c_str());
-            temp.url = _url;
-            genomes_list.append(temp);
-        }
-        delete doc;
+      value = doc->getChildValue("organism", i, "internalname", 0);
+      temp.internal_name = value.c_str();
+
+      genomes_list.append(temp);
     }
-    return genomes_list;
+    delete doc;
+  }
+  return genomes_list;
 }
