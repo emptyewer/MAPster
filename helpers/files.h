@@ -24,13 +24,14 @@ public:
     QString get_mapster_genomes_dir();
     QString get_mapster_queues_dir();
     QString get_mapster_configs_dir();
+    QString get_mapster_output_dir();
     QVector<genome> get_genomes_list();
     void create_documents_folder();
     void untar_files_mac(genome g);
     void extract(const char *filename);
-
-private:
     void make_directory(QString path);
+private:
+
     QString documents_dir;
     int copy_data(struct archive *ar, struct archive *aw);
 };

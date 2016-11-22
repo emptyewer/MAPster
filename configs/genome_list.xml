@@ -1,4 +1,10 @@
 <organisms>
+    <organism species="Mus musculus">
+        <name>UCSC mm10</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/mm10.tar.gz</url>
+        <internalname>mm10/genome</internalname>
+    </organism>
     <organism species="Drosophila melanogaster">
         <name>Ensembl BDGP6</name>
         <type>genome</type>

@@ -118,25 +118,24 @@ void MainWindow::on_genome_box_currentIndexChanged(int index) {
 
 void MainWindow::download_genome_if_absent() {
   QString genome_file_path = f.get_genome_filepath(genomes_list[genome_index]);
-
-  // Download genome file if it does not exist
-  if (!QFile(genome_file_path).exists()) {
-    qDebug() << "Doesn't Exist";
-    mManager->download(f.get_genome_url(genomes_list[genome_index]),
-                       genome_file_path);
-    d_label = "Downloading " + genomes_list[genome_index].name + " (" +
-              genomes_list[genome_index].species + ", " +
-              genomes_list[genome_index].type + ") ...";
-    ui->download_label->setText(d_label);
-    ui->run_button->setEnabled(false);
-    ui->progress_bar->setVisible(true);
-    ui->download_label->setVisible(true);
-  }
   // If genome file is not extracted then untar
   if (!QFile(f.get_mapster_genomes_dir() + "/" +
              genomes_list[genome_index].internal_name + ".1.ht2")
            .exists()) {
-    f.untar_files_mac(genomes_list[genome_index]);
+    if (QFile(genome_file_path).exists()) {
+      f.untar_files_mac(genomes_list[genome_index]);
+    } else {
+      qDebug() << "Doesn't Exist";
+      mManager->download(f.get_genome_url(genomes_list[genome_index]),
+                         genome_file_path);
+      d_label = "Downloading " + genomes_list[genome_index].name + " (" +
+                genomes_list[genome_index].species + ", " +
+                genomes_list[genome_index].type + ") ...";
+      ui->download_label->setText(d_label);
+      ui->run_button->setEnabled(false);
+      ui->progress_bar->setVisible(true);
+      ui->download_label->setVisible(true);
+    }
   }
 }
 
@@ -149,26 +148,60 @@ void MainWindow::on_add_to_queue_button_clicked() {
 void MainWindow::update_jobs_table() {
   ui->jobs_table->setRowCount(q.get_jobs_count());
   QList<QString> names = q.get_output_names();
-  QList<int> states = q.get_running_states();
+  QList<int> states = q.get_current_states();
   for (int i = 0; i < q.get_jobs_count(); i++) {
-    QTableWidgetItem *c0 = new QTableWidgetItem(tr(""));
+    QTableWidgetItem *c0 = new QTableWidgetItem;
     if (states.at(i) == 0) {
-      c0->setText("In Q...");
+      c0->setText("Waiting");
+      QIcon icon(":/images/waiting.png");
+      c0->setIcon(icon);
+    } else if (states.at(i) == 1) {
+      c0->setText("Running");
+      QIcon icon(":/images/running.png");
+      c0->setIcon(icon);
+    } else {
+      c0->setText("Finished");
+      QIcon icon(":/images/done.png");
+      c0->setIcon(icon);
     }
-    else if (states.at(i) == 1) {
-        c0->setText("Running");
-      }
-    else {
-        c0->setText("Done!");
-      }
     QTableWidgetItem *c1 = new QTableWidgetItem(names.at(i));
     ui->jobs_table->setItem(i, 0, c0);
     ui->jobs_table->setItem(i, 1, c1);
   }
 }
 
-void MainWindow::Run() {
-  char command[1024];
-  sprintf(command, "hisat2/hisat2");
-  system((char *)command);
+void MainWindow::run_next_in_queue() {
+  total_jobs = q.get_jobs_count();
+  update_jobs_table();
+  if (current_proc->processId() == 0) {
+    q.update_state(current_job, 2);
+    current_job += 1;
+    if (current_job < total_jobs) {
+      q.update_state(current_job, 1);
+      current_proc = q.run(current_job);
+    } else {
+      update_jobs_table();
+      timer->stop();
+      ui->run_button->setEnabled(true);
+    }
+  }
+}
+
+void MainWindow::on_clear_queue_button_clicked() {
+  ui->jobs_table->clear();
+  q.queue.clear();
+  q.set_current_index(0);
+}
+
+void MainWindow::on_run_button_clicked() {
+  total_jobs = q.get_jobs_count();
+  current_job = 0;
+  q.update_state(current_job, 1);
+  update_jobs_table();
+  current_proc = q.run(current_job);
+
+  timer = new QTimer(this);
+  connect(timer, SIGNAL(timeout()), this, SLOT(run_next_in_queue()));
+  timer->start(1000);
+  ui->run_button->setEnabled(false);
 }

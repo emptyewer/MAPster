@@ -3,7 +3,6 @@
 UIElements::UIElements() {}
 
 parameters UIElements::get_parameters(MainWindow *parent) {
-  qDebug() << parent->ui->progress_bar;
   parameters params;
   if (parent->ui->pairwise_on) {
     params.pairwise = true;
@@ -24,6 +23,7 @@ parameters UIElements::get_parameters(MainWindow *parent) {
   }
   params.output_filename = parent->ui->output_filename->text();
   params.threads = parent->ui->threads_sbox->value();
+  params.genome = parent->genomes_list[parent->genome_index];
   return params;
 }
 

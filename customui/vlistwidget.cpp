@@ -1,5 +1,4 @@
 #include "vlistwidget.h"
-#include <QDebug>
 #include <QDrag>
 #include <QDragEnterEvent>
 #include <QMimeData>
@@ -21,4 +20,10 @@ void VListWidget::dragEnterEvent(QDragEnterEvent *event)
         event->accept();
     else
         event->ignore();
+}
+
+void VListWidget::keyPressEvent(QKeyEvent *event) {
+  if (event->key() == 68) {
+      this->clear();
+  }
 }

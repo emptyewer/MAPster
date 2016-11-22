@@ -18,6 +18,8 @@ class MainWindow : public QMainWindow {
 public:
   explicit MainWindow(QWidget *parent = 0);
   Ui::MainWindow *ui;
+  QVector<genome> genomes_list;
+  int genome_index;
   ~MainWindow();
 
 private slots:
@@ -28,10 +30,13 @@ private slots:
   void on_selected_files_list1_clicked();
   void on_genome_box_currentIndexChanged(int index);
   void on_add_to_queue_button_clicked();
+  void on_run_button_clicked();
   void addLine(QString qsLine);
   void progress(int nPercentage);
   void finished();
   void update_jobs_table();
+  void run_next_in_queue();
+  void on_clear_queue_button_clicked();
 
 private:
   void Run();
@@ -44,12 +49,14 @@ private:
   void download_genome_if_absent();
   QFileSystemModel *drivesModel;
   QFileSystemModel *filesModel;
-  QVector<genome> genomes_list;
   DownloadManager *mManager;
   QString d_label;
   files f;
-  int genome_index;
   runqueue q;
+  int total_jobs;
+  int current_job;
+  QProcess *current_proc;
+  QTimer *timer;
 };
 
 #endif // MAINWINDOW_H

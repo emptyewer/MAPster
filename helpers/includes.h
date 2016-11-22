@@ -9,4 +9,5 @@
 #include <QList>
 #include <QDebug>
 #include <cstdlib>
+#include <QProcess>
 #endif // INCLUDES_H

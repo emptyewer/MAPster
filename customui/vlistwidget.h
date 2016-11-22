@@ -2,6 +2,7 @@
 #define VLISTWIDGET_H
 
 #include <QListWidget>
+#include "helpers/includes.h"
 
 class VListWidget : public QListWidget {
 public:
@@ -10,6 +11,7 @@ public:
 protected:
   void dropEvent(QDropEvent *event) Q_DECL_OVERRIDE;
   void dragEnterEvent(QDragEnterEvent *event) Q_DECL_OVERRIDE;
+  void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 };
 
 #endif // VLISTWIDGET_H

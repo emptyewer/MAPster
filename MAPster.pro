@@ -80,3 +80,6 @@ DISTFILES += \
     images/done.png \
     images/running.png \
     images/waiting.png
+
+RESOURCES += \
+    images.qrc

@@ -18,7 +18,7 @@ QString files::get_genome_filename(genome g) {
 }
 
 QString files::get_mapster_dir() {
-  return QDir(documents_dir).filePath("MAPster Files");
+  return QDir(documents_dir).filePath("MAPsterFiles");
 }
 
 QString files::get_mapster_genomes_dir() {
@@ -36,6 +36,11 @@ QString files::get_mapster_configs_dir() {
   return QDir(mapster_dir).filePath("Configs");
 }
 
+QString files::get_mapster_output_dir() {
+  QString mapster_dir = get_mapster_dir();
+  return QDir(mapster_dir).filePath("Output");
+}
+
 QString files::get_genome_url(genome g) { return g.url.toString(); }
 
 void files::make_directory(QString path) {
@@ -49,6 +54,7 @@ void files::create_documents_folder() {
   make_directory(get_mapster_configs_dir());
   make_directory(get_mapster_queues_dir());
   make_directory(get_mapster_genomes_dir());
+  make_directory(get_mapster_output_dir());
 }
 
 void files::untar_files_mac(genome g) {
