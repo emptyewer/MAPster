@@ -41,6 +41,15 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
+DISTFILES += \
+    images/done.png \
+    images/running.png \
+    images/waiting.png
+
+RESOURCES += \
+    images.qrc
+
+# Mac Specific Code
 macx {
     DDIR = $$OUT_PWD/MAPster.app/Contents/MacOS/hisat2
     copydata.commands = $(COPY_DIR) $$PWD/hisat2/mac $$DDIR
@@ -55,19 +64,15 @@ macx {
     QMAKE_EXTRA_TARGETS += first copydata copyconfigs
 }
 
-macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/lib/ -lxerces-c
-
-INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/include
-
-macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/lib/libxerces-c.a
+QMAKE_POST_LINK += "/Users/Venky/Qt5.6/5.6/clang_64/bin/macdeployqt MAPster.app"
 
 macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/lib/ -lboost_container
 
-INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/include/
-DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/include/
+INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/include
+DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/include
 
 macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/lib/libboost_container.a
+
 
 macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/lib/ -larchive
 
@@ -76,10 +81,9 @@ DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/include
 
 macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/lib/libarchive.a
 
-DISTFILES += \
-    images/done.png \
-    images/running.png \
-    images/waiting.png
+macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/lib/ -lxerces-c
 
-RESOURCES += \
-    images.qrc
+INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/include
+DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/include
+
+macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/lib/libxerces-c.a

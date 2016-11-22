@@ -64,8 +64,8 @@ void files::untar_files_mac(genome g) {
 }
 
 void files::extract(const char *filename) {
-  struct archive *a = nullptr;
-  struct archive_entry *entry = nullptr;
+  struct archive *a = NULL;
+  struct archive_entry *entry = NULL;
   int r;
   QString path_qstring = get_mapster_genomes_dir();
   string s = path_qstring.toStdString();
