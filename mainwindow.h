@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QMainWindow>
-
+#include "ui_mainwindow.h"
 #include "download/downloadmanager.h"
 #include "helpers/files.h"
 #include "helpers/includes.h"
@@ -18,16 +18,14 @@ class MainWindow : public QMainWindow {
 public:
   explicit MainWindow(QWidget *parent = 0);
   Ui::MainWindow *ui;
-  QVector<genome> genomes_list;
+  QVector<Genome> genomes_list;
   int genome_index;
   ~MainWindow();
 
 private slots:
   void on_folder_tree_clicked(const QModelIndex &index);
-  void on_file_list_doubleClicked(const QModelIndex &index);
   void on_pairwise_on_clicked(bool checked);
   void on_pairwise_off_clicked(bool checked);
-  void on_selected_files_list1_clicked();
   void on_genome_box_currentIndexChanged(int index);
   void on_add_to_queue_button_clicked();
   void on_run_button_clicked();
@@ -37,6 +35,7 @@ private slots:
   void update_jobs_table();
   void run_next_in_queue();
   void on_clear_queue_button_clicked();
+  void output_file_text_changed();
 
 private:
   void Run();
@@ -45,14 +44,14 @@ private:
   void setupSlots();
   void populate_genomes_list();
   void make_directory(QString path);
-  void add_to_genome_box(genome g);
+  void add_to_genome_box(Genome g);
   void download_genome_if_absent();
   QFileSystemModel *drivesModel;
   QFileSystemModel *filesModel;
   DownloadManager *mManager;
   QString d_label;
-  files f;
-  runqueue q;
+  Files f;
+  RunQueue q;
   int total_jobs;
   int current_job;
   QProcess *current_proc;

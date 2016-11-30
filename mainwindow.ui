@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>700</height>
+    <height>900</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -32,21 +32,48 @@
       <property name="enabled">
        <bool>true</bool>
       </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="tabPosition">
-       <enum>QTabWidget::North</enum>
+       <enum>QTabWidget::West</enum>
       </property>
       <property name="tabShape">
-       <enum>QTabWidget::Rounded</enum>
+       <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
       <property name="elideMode">
        <enum>Qt::ElideRight</enum>
       </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>false</bool>
+      </property>
       <widget class="QWidget" name="main_tab">
        <attribute name="title">
-        <string>Files</string>
+        <string>Main</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -160,13 +187,23 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>1</number>
+          </property>
           <item>
            <widget class="QLabel" name="selected_files1_label">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>16</height>
+              <height>13</height>
              </size>
             </property>
             <property name="text">
@@ -175,28 +212,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="selected_files2_label">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Paired Reads (Set 2)</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
            <widget class="VListWidget" name="selected_files_list1">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>168</height>
+              <height>70</height>
              </size>
             </property>
             <property name="acceptDrops">
@@ -220,11 +240,24 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="selected_files2_label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>13</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Paired Reads (Set 2)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="VListWidget" name="selected_files_list2">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>168</height>
+              <height>70</height>
              </size>
             </property>
             <property name="acceptDrops">
@@ -261,56 +294,33 @@
            </size>
           </property>
           <property name="title">
-           <string>Basic Parameters</string>
+           <string>Main Arguments</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="2" column="0">
-            <widget class="QLabel" name="threads_label">
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Threads</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="genome_label">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Genome</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QComboBox" name="genome_box"/>
-           </item>
+           <property name="leftMargin">
+            <number>8</number>
+           </property>
+           <property name="topMargin">
+            <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>8</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>-1</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>0</number>
+           </property>
            <item row="0" column="2">
             <layout class="QHBoxLayout" name="pairwise_layout">
              <item>
               <widget class="QGroupBox" name="pairwise_group">
                <property name="enabled">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="maximumSize">
                 <size>
@@ -380,6 +390,82 @@
              </item>
             </layout>
            </item>
+           <item row="2" column="2">
+            <widget class="QSpinBox" name="threads_sbox">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>64</number>
+             </property>
+             <property name="value">
+              <number>2</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLineEdit" name="output_filename"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="output_label">
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Output Filename</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QComboBox" name="genome_box"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="genome_label">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Genome</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="threads_label">
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Threads</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="pairwise_label">
              <property name="minimumSize">
@@ -402,40 +488,34 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="2">
-            <widget class="QSpinBox" name="threads_sbox">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="minimum">
-              <number>1</number>
-             </property>
-             <property name="maximum">
-              <number>64</number>
-             </property>
-             <property name="value">
-              <number>2</number>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="output_label">
+           <item row="4" column="2">
+            <widget class="QLabel" name="output_dir_label">
              <property name="maximumSize">
               <size>
-               <width>150</width>
+               <width>16777215</width>
                <height>20</height>
               </size>
              </property>
-             <property name="text">
-              <string>Output Filename</string>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <italic>true</italic>
+               <stylestrategy>PreferAntialias</stylestrategy>
+              </font>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::PlainText</enum>
+             </property>
+             <property name="margin">
+              <number>0</number>
              </property>
             </widget>
-           </item>
-           <item row="3" column="2">
-            <widget class="QLineEdit" name="output_filename"/>
            </item>
           </layout>
          </widget>
@@ -461,42 +541,353 @@
       </widget>
       <widget class="QWidget" name="second_tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>Input</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QGroupBox" name="reads_format">
+          <property name="title">
+           <string>Reads Format</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <item>
+            <widget class="QRadioButton" name="fastq_reads">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>FASTQ (default). Files usually have extension .fq or .fastq.</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="qseq_reads">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>QSEQ. Files usually end in _qseq.txt.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="fasta_reads">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>FASTA. Files usually have extension .fa, .fasta, .mfa, .fna or similar.</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Encoding</string>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+          <widget class="QRadioButton" name="phread33">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>30</y>
+             <width>481</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Input qualities are ASCII chars equal to the Phred quality plus 33 (Illumina)</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="phread64">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>60</y>
+             <width>481</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Input qualities are ASCII chars equal to the Phred quality plus 64</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="maximumSize">
+             <size>
+              <width>91</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Skip the first </string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="skip_first_sbx">
+            <property name="maximum">
+             <number>999999999</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>reads or pairs in the input.</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="maximumSize">
+             <size>
+              <width>91</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Align the first </string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="align_first_sbx">
+            <property name="maximum">
+             <number>999999999</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>reads or pairs in the input, then stop.</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="maximumSize">
+             <size>
+              <width>91</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Trim</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="trim5_sbx">
+            <property name="maximum">
+             <number>999999999</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>bases from 5' (left) end of each read before alignment</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="maximumSize">
+             <size>
+              <width>91</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Trim</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="trim4_sbx">
+            <property name="maximum">
+             <number>999999999</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>bases from 3' (right) end of each read before alignment</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="convert_solexa_cbx">
+          <property name="text">
+           <string>Convert input qualities from Solexa (which can be negative) to Phred (which can't).</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="third_tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>Alignment</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="fourth_tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>Scoring</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QWidget" name="fifth_tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>Reporting</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tab_4">
+      <widget class="QWidget" name="sixth_tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>Output</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="seventh_tab">
+       <attribute name="title">
+        <string>SAM</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Performance</string>
        </attribute>
       </widget>
      </widget>

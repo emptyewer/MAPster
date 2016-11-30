@@ -1,55 +1,55 @@
 #include "files.h"
 
-files::files() {
+Files::Files() {
   documents_dir =
       QStandardPaths::locate(QStandardPaths::DocumentsLocation, QString(),
                              QStandardPaths::LocateDirectory);
 }
 
-QString files::get_genome_filepath(genome g) {
+QString Files::get_genome_filepath(Genome g) {
   QString mapster_genomes_dir = get_mapster_genomes_dir();
   QString gfn = QDir(mapster_genomes_dir).filePath(get_genome_filename(g));
   return gfn;
 }
 
-QString files::get_genome_filename(genome g) {
+QString Files::get_genome_filename(Genome g) {
   QFileInfo fileInfo(g.url.toString());
   return fileInfo.fileName();
 }
 
-QString files::get_mapster_dir() {
+QString Files::get_mapster_dir() {
   return QDir(documents_dir).filePath("MAPsterFiles");
 }
 
-QString files::get_mapster_genomes_dir() {
+QString Files::get_mapster_genomes_dir() {
   QString mapster_dir = get_mapster_dir();
   return QDir(mapster_dir).filePath("Genomes");
 }
 
-QString files::get_mapster_queues_dir() {
+QString Files::get_mapster_queues_dir() {
   QString mapster_dir = get_mapster_dir();
   return QDir(mapster_dir).filePath("Queues");
 }
 
-QString files::get_mapster_configs_dir() {
+QString Files::get_mapster_configs_dir() {
   QString mapster_dir = get_mapster_dir();
   return QDir(mapster_dir).filePath("Configs");
 }
 
-QString files::get_mapster_output_dir() {
+QString Files::get_mapster_output_dir() {
   QString mapster_dir = get_mapster_dir();
   return QDir(mapster_dir).filePath("Output");
 }
 
-QString files::get_genome_url(genome g) { return g.url.toString(); }
+QString Files::get_genome_url(Genome g) { return g.url.toString(); }
 
-void files::make_directory(QString path) {
+void Files::make_directory(QString path) {
   if (!QDir(path).exists()) {
     QDir().mkpath(path);
   }
 }
 
-void files::create_documents_folder() {
+void Files::create_documents_folder() {
   make_directory(get_mapster_dir());
   make_directory(get_mapster_configs_dir());
   make_directory(get_mapster_queues_dir());
@@ -57,13 +57,13 @@ void files::create_documents_folder() {
   make_directory(get_mapster_output_dir());
 }
 
-void files::untar_files_mac(genome g) {
+void Files::untar_files_mac(Genome g) {
   QString command = "tar xvfz \"" + get_genome_filepath(g) +"\" -C \"" + get_mapster_genomes_dir() + "\"" ;
   string command_str = command.toStdString();
   system(command_str.c_str());
 }
 
-void files::extract(const char *filename) {
+void Files::extract(const char *filename) {
   struct archive *a = NULL;
   struct archive_entry *entry = NULL;
   int r;
@@ -86,18 +86,18 @@ void files::extract(const char *filename) {
   r = archive_read_free(a);  // Note 3
 }
 
-QVector<genome> files::get_genomes_list() {
+QVector<Genome> Files::get_genomes_list() {
   QString appdir = QCoreApplication::applicationDirPath();
   QString appdir_configsdir = QDir(appdir).filePath("configs");
   QString xml_file = QDir(appdir_configsdir).filePath("genome_list.xml");
   std::string str = xml_file.toStdString();
   const char *p = str.c_str();
-  QVector<genome> genomes_list;
+  QVector<Genome> genomes_list;
   string value;
   XmlDomDocument *doc = new XmlDomDocument(p);
   if (doc) {
     for (int i = 0; i < doc->getChildCount("organisms", 0, "organism"); i++) {
-      genome temp;
+      Genome temp;
       temp.index = i;
 
       value = doc->getChildAttribute("organisms", 0, "organism", i, "species");

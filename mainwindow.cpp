@@ -1,15 +1,19 @@
 #include "mainwindow.h"
 #include "customui/uielements.h"
-#include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  setupViews();
+  //  setupViews();
   setupSlots();
-  f = files();
-  q = runqueue();
+  f = Files();
   f.create_documents_folder();
+
+  drivesModel = UIElements().setup_folder_view(this);
+  filesModel = UIElements().setup_files_view(this);
+  UIElements().setup_other_elements(this);
+
+  q = RunQueue();
   populate_genomes_list();
   genome_index = 0;
 }
@@ -19,29 +23,6 @@ MainWindow::~MainWindow() {
   delete drivesModel;
   delete filesModel;
   delete mManager;
-}
-
-void MainWindow::setupViews() {
-  QString homeLocation = QStandardPaths::locate(
-      QStandardPaths::HomeLocation, QString(), QStandardPaths::LocateDirectory);
-  drivesModel = new QFileSystemModel(this);
-  drivesModel->setReadOnly(false);
-  drivesModel->setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
-  drivesModel->setRootPath(homeLocation);
-  ui->folder_tree->setModel(drivesModel);
-  ui->folder_tree->setRootIndex(drivesModel->setRootPath(homeLocation));
-  ui->folder_tree->hideColumn(1);
-  ui->folder_tree->hideColumn(2);
-  ui->folder_tree->hideColumn(3);
-  ui->folder_tree->hideColumn(4);
-  filesModel = new QFileSystemModel(this);
-  filesModel->setReadOnly(false);
-  filesModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
-  filesModel->setRootPath(homeLocation);
-  ui->file_list->setModel(filesModel);
-  ui->file_list->setRootIndex(filesModel->setRootPath(homeLocation));
-  ui->progress_bar->setVisible(false);
-  ui->download_label->setVisible(false);
 }
 
 void MainWindow::addLine(QString qsLine) { qDebug() << qsLine; }
@@ -59,9 +40,6 @@ void MainWindow::finished() {
   ui->progress_bar->setVisible(false);
   ui->download_label->setVisible(false);
   ui->run_button->setEnabled(true);
-  //    ui->downloadBtn->setEnabled(true);
-  //    ui->pauseBtn->setEnabled(false);
-  //    ui->resumeBtn->setEnabled(false);
 }
 
 void MainWindow::setupSlots() {
@@ -69,25 +47,25 @@ void MainWindow::setupSlots() {
   connect(mManager, SIGNAL(addLine(QString)), this, SLOT(addLine(QString)));
   connect(mManager, SIGNAL(downloadComplete()), this, SLOT(finished()));
   connect(mManager, SIGNAL(progress(int)), this, SLOT(progress(int)));
+  connect(ui->output_filename, SIGNAL(editingFinished()),
+          SLOT(output_file_text_changed()));
 }
 
-void MainWindow::on_file_list_doubleClicked(const QModelIndex &index) {
-  qDebug() << filesModel->fileInfo(index).absoluteFilePath();
-  //    item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-  //    item->setCheckState(Qt::Unchecked);
+void MainWindow::output_file_text_changed() {
+  UIElements().add_extension_to_output(this, &f);
 }
 
 void MainWindow::on_pairwise_on_clicked(bool checked) {
-  UIElements uie = UIElements();
-  uie.pairwise_toggle(this, 1);
+  if (checked) {
+  }
+  UIElements().pairwise_toggle(this, 1);
 }
 
 void MainWindow::on_pairwise_off_clicked(bool checked) {
-  UIElements uie = UIElements();
-  uie.pairwise_toggle(this, 0);
+  if (checked) {
+  }
+  UIElements().pairwise_toggle(this, 0);
 }
-
-void MainWindow::on_selected_files_list1_clicked() { qDebug() << "Clicked"; }
 
 void MainWindow::on_folder_tree_clicked(const QModelIndex &index) {
   QString path = drivesModel->fileInfo(index).absoluteFilePath();
@@ -102,10 +80,10 @@ void MainWindow::make_directory(QString path) {
 
 void MainWindow::populate_genomes_list() {
   genomes_list = f.get_genomes_list();
-  BOOST_FOREACH (genome g, genomes_list) { add_to_genome_box(g); }
+  BOOST_FOREACH (Genome g, genomes_list) { add_to_genome_box(g); }
 }
 
-void MainWindow::add_to_genome_box(genome g) {
+void MainWindow::add_to_genome_box(Genome g) {
   QString s = QString::number(g.index + 1) + ". " + g.name + " (" + g.species +
               ", " + g.type + ")";
   ui->genome_box->addItem(s);
@@ -140,8 +118,10 @@ void MainWindow::download_genome_if_absent() {
 }
 
 void MainWindow::on_add_to_queue_button_clicked() {
-  UIElements uie = UIElements();
-  q.add_job(uie.get_parameters(this));
+  UIElements().add_extension_to_output(this, &f);
+  q.add_job(UIElements().get_parameters(this));
+  qDebug() << UIElements().get_parameters(this).reads1;
+  qDebug() << UIElements().get_parameters(this).reads2;
   update_jobs_table();
 }
 

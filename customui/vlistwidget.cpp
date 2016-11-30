@@ -1,29 +1,27 @@
 #include "vlistwidget.h"
+#include "helpers/includes.h"
 #include <QDrag>
 #include <QDragEnterEvent>
 #include <QMimeData>
 
-VListWidget::VListWidget(QWidget *parent)
-{
-    setAcceptDrops(true);
+VListWidget::VListWidget(QWidget *parent) { setAcceptDrops(true); }
+
+void VListWidget::dropEvent(QDropEvent *event) {
+  QString path = event->mimeData()->urls()[0].path();
+  new QListWidgetItem(path, this);
 }
 
-void VListWidget::dropEvent(QDropEvent *event)
-{
-    QString path = event->mimeData()->urls()[0].path();
-    new QListWidgetItem(path, this);
-}
-
-void VListWidget::dragEnterEvent(QDragEnterEvent *event)
-{
+void VListWidget::dragEnterEvent(QDragEnterEvent *event) {
+  if (event->source()->objectName() == "file_list") {
     if (event->mimeData())
-        event->accept();
+      event->accept();
     else
-        event->ignore();
+      event->ignore();
+  }
 }
 
 void VListWidget::keyPressEvent(QKeyEvent *event) {
   if (event->key() == 68) {
-      this->clear();
+    this->clear();
   }
 }

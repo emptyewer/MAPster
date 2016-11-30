@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     helpers/files.cpp \
     customui/vlistwidget.cpp \
     helpers/runqueue.cpp \
-    customui/uielements.cpp
+    customui/uielements.cpp \
+    helpers/error.cpp
 
 HEADERS  += mainwindow.h \
     xml/XMLDomDocument.h \
@@ -37,7 +38,8 @@ HEADERS  += mainwindow.h \
     customui/vlistwidget.h \
     helpers/includes.h \
     helpers/runqueue.h \
-    customui/uielements.h
+    customui/uielements.h \
+    helpers/error.h
 
 FORMS    += mainwindow.ui
 

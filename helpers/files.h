@@ -12,22 +12,22 @@
 #include "mystructs.h"
 #include "xml/XMLDomDocument.h"
 
-class files
+class Files
 {
 public:
-    files();
-    QString get_genome_filepath(genome g);
-    QString get_genome_filename(genome g);
-    QString get_genome_url(genome g);
+    Files();
+    QString get_genome_filepath(Genome g);
+    QString get_genome_filename(Genome g);
+    QString get_genome_url(Genome g);
     // Return Default Directory Names
     QString get_mapster_dir();
     QString get_mapster_genomes_dir();
     QString get_mapster_queues_dir();
     QString get_mapster_configs_dir();
     QString get_mapster_output_dir();
-    QVector<genome> get_genomes_list();
+    QVector<Genome> get_genomes_list();
     void create_documents_folder();
-    void untar_files_mac(genome g);
+    void untar_files_mac(Genome g);
     void extract(const char *filename);
     void make_directory(QString path);
 private:

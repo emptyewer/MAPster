@@ -4,7 +4,7 @@
 #include <QString>
 #include <QUrl>
 
-struct genome {
+struct Genome {
   int index;
   QString name;
   QString type;
@@ -13,13 +13,13 @@ struct genome {
   QString internal_name;
 };
 
-struct parameters {
-  genome genome;
+struct Parameters {
+  Genome genome;
   bool pairwise;
   int threads;
   QString reads1;
   QString reads2;
-  QString output_filename;
+  QString output_filename = NULL;
   int state = 0;
 };
 
