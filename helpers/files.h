@@ -1,7 +1,5 @@
 #ifndef FILES_H
 #define FILES_H
-#include <QDir>
-#include <QVector>
 #include <QFileInfo>
 #include <QStandardPaths>
 #include <QCoreApplication>

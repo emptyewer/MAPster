@@ -9,8 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
   f = Files();
   f.create_documents_folder();
 
-  drivesModel = UIElements().setup_folder_view(this);
-  filesModel = UIElements().setup_files_view(this);
   UIElements().setup_other_elements(this);
 
   q = RunQueue();
@@ -20,8 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow() {
   delete ui;
-  delete drivesModel;
-  delete filesModel;
   delete mManager;
 }
 
@@ -67,10 +63,10 @@ void MainWindow::on_pairwise_off_clicked(bool checked) {
   UIElements().pairwise_toggle(this, 0);
 }
 
-void MainWindow::on_folder_tree_clicked(const QModelIndex &index) {
-  QString path = drivesModel->fileInfo(index).absoluteFilePath();
-  ui->file_list->setRootIndex(filesModel->setRootPath(path));
-}
+//void MainWindow::on_folder_tree_clicked(const QModelIndex &index) {
+//  QString path = drivesModel->fileInfo(index).absoluteFilePath();
+//  ui->file_list->setRootIndex(filesModel->setRootPath(path));
+//}
 
 void MainWindow::make_directory(QString path) {
   if (!QDir(path).exists()) {

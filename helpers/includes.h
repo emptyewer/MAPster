@@ -2,6 +2,7 @@
 #define INCLUDES_H
 #include <boost/foreach.hpp>
 #include <QFileSystemModel>
+#include <QDir>
 #include <stdio.h>
 #include <algorithm>
 #include <QtWidgets>

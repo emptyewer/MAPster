@@ -23,7 +23,7 @@ public:
   ~MainWindow();
 
 private slots:
-  void on_folder_tree_clicked(const QModelIndex &index);
+//  void on_folder_tree_clicked(const QModelIndex &index);
   void on_pairwise_on_clicked(bool checked);
   void on_pairwise_off_clicked(bool checked);
   void on_genome_box_currentIndexChanged(int index);

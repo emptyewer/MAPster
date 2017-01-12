@@ -49,33 +49,33 @@ void UIElements::pairwise_toggle(MainWindow *parent, int i) {
   }
 }
 
-QFileSystemModel *UIElements::setup_folder_view(MainWindow *parent) {
-  QString homeLocation = QStandardPaths::locate(
-      QStandardPaths::HomeLocation, QString(), QStandardPaths::LocateDirectory);
-  QFileSystemModel *drivesModel = new QFileSystemModel();
-  drivesModel->setReadOnly(false);
-  drivesModel->setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
-  drivesModel->setRootPath(homeLocation);
-  parent->ui->folder_tree->setModel(drivesModel);
-  parent->ui->folder_tree->setRootIndex(drivesModel->setRootPath(homeLocation));
-  parent->ui->folder_tree->hideColumn(1);
-  parent->ui->folder_tree->hideColumn(2);
-  parent->ui->folder_tree->hideColumn(3);
-  parent->ui->folder_tree->hideColumn(4);
-  return drivesModel;
-}
+//QFileSystemModel *UIElements::setup_folder_view(MainWindow *parent) {
+//  QString homeLocation = QStandardPaths::locate(
+//      QStandardPaths::HomeLocation, QString(), QStandardPaths::LocateDirectory);
+//  QFileSystemModel *drivesModel = new QFileSystemModel();
+//  drivesModel->setReadOnly(false);
+//  drivesModel->setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
+//  drivesModel->setRootPath(homeLocation);
+//  parent->ui->folder_tree->setModel(drivesModel);
+//  parent->ui->folder_tree->setRootIndex(drivesModel->setRootPath(homeLocation));
+//  parent->ui->folder_tree->hideColumn(1);
+//  parent->ui->folder_tree->hideColumn(2);
+//  parent->ui->folder_tree->hideColumn(3);
+//  parent->ui->folder_tree->hideColumn(4);
+//  return drivesModel;
+//}
 
-QFileSystemModel *UIElements::setup_files_view(MainWindow *parent) {
-  QString homeLocation = QStandardPaths::locate(
-      QStandardPaths::HomeLocation, QString(), QStandardPaths::LocateDirectory);
-  QFileSystemModel *filesModel = new QFileSystemModel();
-  filesModel->setReadOnly(false);
-  filesModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
-  filesModel->setRootPath(homeLocation);
-  parent->ui->file_list->setModel(filesModel);
-  parent->ui->file_list->setRootIndex(filesModel->setRootPath(homeLocation));
-  return filesModel;
-}
+//QFileSystemModel *UIElements::setup_files_view(MainWindow *parent) {
+//  QString homeLocation = QStandardPaths::locate(
+//      QStandardPaths::HomeLocation, QString(), QStandardPaths::LocateDirectory);
+//  QFileSystemModel *filesModel = new QFileSystemModel();
+//  filesModel->setReadOnly(false);
+//  filesModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
+//  filesModel->setRootPath(homeLocation);
+//  parent->ui->file_list->setModel(filesModel);
+//  parent->ui->file_list->setRootIndex(filesModel->setRootPath(homeLocation));
+//  return filesModel;
+//}
 
 void UIElements::setup_other_elements(MainWindow *parent) {
   parent->ui->progress_bar->setVisible(false);

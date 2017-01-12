@@ -68,26 +68,26 @@ macx {
 
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
 
-QMAKE_POST_LINK += "bash /Users/Venky/Work/Softwares/HISAT2/MAPster/post_compile.sh"
+#QMAKE_POST_LINK += "bash /Users/Venky/Work/Softwares/HISAT2/MAPster/post_compile.sh"
 
-macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/lib/ -lboost_container
+macx: LIBS += -L$$PWD/../../../../../../usr/local/lib/ -lboost_container
 
-INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/include
+INCLUDEPATH += $$PWD/../../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../../usr/local/include
 
-macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/lib/libboost_container.a
+macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libboost_container.a
 
 
-macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/lib/ -larchive
+macx: LIBS += -L$$PWD/../../../../../../usr/local/lib/ -larchive
 
-INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/include
+INCLUDEPATH += $$PWD/../../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../../usr/local/include
 
-macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/libarchive/3.2.1/lib/libarchive.a
+macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libarchive.a
 
-macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/lib/ -lxerces-c
+macx: LIBS += -L$$PWD/../../../../../../usr/local/lib/ -lxerces-c
 
-INCLUDEPATH += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/include
+INCLUDEPATH += $$PWD/../../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../../usr/local/include
 
-macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/Cellar/xerces-c/3.1.4/lib/libxerces-c.a
+macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libxerces-c.a
