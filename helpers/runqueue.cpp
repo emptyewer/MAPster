@@ -1,6 +1,5 @@
 #include "runqueue.h"
 #include "files.h"
-#include "helpers/error.h"
 
 RunQueue::RunQueue() {
 }

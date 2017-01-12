@@ -92,11 +92,22 @@ void UIElements::setup_other_elements(MainWindow *parent) {
 
 void UIElements::add_extension_to_output(MainWindow *parent, Files *f) {
   QString text = parent->ui->output_filename->text();
-  QFileInfo fi(text);
-  if (fi.completeSuffix() != "sam") {
-    parent->ui->output_filename->setText(text + ".sam");
+  QString error_string = NULL;
+  if (text == NULL) {
+      error_string += "Output Filename is Not Valid!";
   }
-  parent->ui->output_dir_label->setText("Output will be saved to: " +
-                                f->get_mapster_output_dir());
-  parent->ui->output_dir_label->setVisible(true);
+
+  if (error_string == NULL) {
+      QFileInfo fi(text);
+      if (fi.completeSuffix() != "sam") {
+        parent->ui->output_filename->setText(text + ".sam");
+      }
+      parent->ui->output_dir_label->setText("Output will be saved to: " +
+                                    f->get_mapster_output_dir());
+      parent->ui->output_dir_label->setVisible(true);
+  } else {
+    VError e = VError(error_string);
+    e.show();
+  }
+
 }

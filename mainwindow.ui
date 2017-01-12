@@ -907,7 +907,9 @@
     <property name="title">
      <string>Parameters</string>
     </property>
+    <addaction name="actionLoad"/>
     <addaction name="actionSave"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -1097,6 +1099,11 @@
   <action name="actionContents">
    <property name="text">
     <string>Mapster</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load...</string>
    </property>
   </action>
  </widget>

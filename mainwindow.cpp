@@ -120,8 +120,6 @@ void MainWindow::download_genome_if_absent() {
 void MainWindow::on_add_to_queue_button_clicked() {
   UIElements().add_extension_to_output(this, &f);
   q.add_job(UIElements().get_parameters(this));
-  qDebug() << UIElements().get_parameters(this).reads1;
-  qDebug() << UIElements().get_parameters(this).reads2;
   update_jobs_table();
 }
 

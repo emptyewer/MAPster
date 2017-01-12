@@ -66,7 +66,9 @@ macx {
     QMAKE_EXTRA_TARGETS += first copydata copyconfigs
 }
 
-QMAKE_POST_LINK += "/Users/Venky/Qt5.6/5.6/clang_64/bin/macdeployqt MAPster.app"
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
+
+QMAKE_POST_LINK += "bash /Users/Venky/Work/Softwares/HISAT2/MAPster/post_compile.sh"
 
 macx: LIBS += -L$$PWD/../../../../../../usr/local/Cellar/boost/1.61.0/lib/ -lboost_container
 

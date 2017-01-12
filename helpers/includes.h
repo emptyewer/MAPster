@@ -10,4 +10,5 @@
 #include <QDebug>
 #include <cstdlib>
 #include <QProcess>
+#include "helpers/error.h"
 #endif // INCLUDES_H
