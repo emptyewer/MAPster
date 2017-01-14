@@ -70,24 +70,24 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
 
 #QMAKE_POST_LINK += "bash /Users/Venky/Work/Softwares/HISAT2/MAPster/post_compile.sh"
 
-macx: LIBS += -L$$PWD/../../../../../../usr/local/lib/ -lboost_container
+macx: LIBS += -L/usr/local/lib/ -lboost_container
 
-INCLUDEPATH += $$PWD/../../../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/include
+INCLUDEPATH += /usr/local/include
+DEPENDPATH += /usr/local/include
 
-macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libboost_container.a
+macx: PRE_TARGETDEPS += /usr/local/lib/libboost_container.a
 
 
-macx: LIBS += -L$$PWD/../../../../../../usr/local/lib/ -larchive
+macx: LIBS += -L/usr/local/lib/ -larchive
 
-INCLUDEPATH += $$PWD/../../../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/include
+INCLUDEPATH += /usr/local/include
+DEPENDPATH += /usr/local/include
 
-macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libarchive.a
+macx: PRE_TARGETDEPS += /usr/local/lib/libarchive.a
 
-macx: LIBS += -L$$PWD/../../../../../../usr/local/lib/ -lxerces-c
+macx: LIBS += -L/usr/local/lib/ -lxerces-c
 
-INCLUDEPATH += $$PWD/../../../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/include
+INCLUDEPATH += /usr/local/include
+DEPENDPATH += /usr/local/include
 
-macx: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libxerces-c.a
+macx: PRE_TARGETDEPS += /usr/local/lib/libxerces-c.a

@@ -5,17 +5,47 @@
         <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/mm10.tar.gz</url>
         <internalname>mm10/genome</internalname>
     </organism>
-    <organism species="Drosophila melanogaster">
-        <name>Ensembl BDGP6</name>
+    <organism species="Mus musculus">
+        <name>Ensembl GRCm38</name>
         <type>genome</type>
-        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/bdgp6.tar.gz</url>
-        <internalname>bdgp6/genome</internalname>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grcm38.tar.gz</url>
+        <internalname>grcm38/genome</internalname>
     </organism>
-    <organism species="Drosophila melanogaster">
-        <name>Ensembl BDGP6</name>
+    <organism species="Mus musculus">
+        <name>Ensembl GRCm38</name>
+        <type>genome + snp</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grcm38_snp.tar.gz</url>
+        <internalname>grcm38_snp/genome_snp</internalname>
+    </organism>
+    <organism species="Mus musculus">
+        <name>Ensembl GRCm38</name>
         <type>genome + transcripts</type>
-        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/bdgp6_tran.tar.gz</url>
-        <internalname>bdgp6_tran/genome</internalname>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grcm38_tran.tar.gz</url>
+        <internalname>grcm38_tran/genome_tran</internalname>
+    </organism>
+    <organism species="Mus musculus">
+        <name>Ensembl GRCm38</name>
+        <type>genome + snp + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grcm38_snp_tran.tar.gz</url>
+        <internalname>grcm38_snp_tran/genome_snp_tran</internalname>
+    </organism>
+    <organism species="Saccharomyces cerevisiae">
+        <name>UCSC sacCer3</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/sc3.tar.gz</url>
+        <internalname>sc3/genome</internalname>
+    </organism>
+    <organism species="Saccharomyces cerevisiae">
+        <name>Ensembl R64-1-1</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/r64.tar.gz</url>
+        <internalname>r64/genome</internalname>
+    </organism>
+    <organism species="Saccharomyces cerevisiae">
+        <name>Ensembl R64-1-1</name>
+        <type>genome + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/r64_tran.tar.gz</url>
+        <internalname>r64_tran/genome_tran</internalname>
     </organism>
     <organism species="Homo sapiens">
         <name>Ensembl GRCh38</name>
@@ -27,6 +57,42 @@
         <name>Ensembl GRCh38</name>
         <type>genome + snp</type>
         <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38_snp.tar.gz</url>
-        <internalname>grch38_snp/genome</internalname>
+        <internalname>grch38_snp/genome_snp</internalname>
+    </organism>
+    <organism species="Homo sapiens">
+        <name>Ensembl GRCh38</name>
+        <type>genome + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38_tran.tar.gz</url>
+        <internalname>grch38_tran/genome_tran</internalname>
+    </organism>
+    <organism species="Homo sapiens">
+        <name>Ensembl GRCh38</name>
+        <type>genome + snp + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38_snp_tran.tar.gz</url>
+        <internalname>grch38_snp_tran/genome_snp_tran</internalname>
+    </organism>
+    <organism species="Homo sapiens">
+        <name>UCSC hg38</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/hg38.tar.gz</url>
+        <internalname>hg38/genome</internalname>
+    </organism>
+    <organism species="Homo sapiens">
+        <name>UCSC hg38</name>
+        <type>genome + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/hg38_tran.tar.gz</url>
+        <internalname>hg38_tran/genome_tran</internalname>
+    </organism>
+    <organism species="Drosophila melanogaster">
+        <name>Ensembl BDGP6</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/bdgp6.tar.gz</url>
+        <internalname>bdgp6/genome</internalname>
+    </organism>
+    <organism species="Drosophila melanogaster">
+        <name>Ensembl BDGP6</name>
+        <type>genome + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/bdgp6_tran.tar.gz</url>
+        <internalname>bdgp6_tran/genome_tran</internalname>
     </organism>
 </organisms>

@@ -9,6 +9,7 @@ public:
   RunQueue();
   void add_job(Parameters p);
   Parameters get_current_parameters();
+  Parameters get_parameters(int index);
   void set_current_index(int i);
   QList<QString> get_output_names();
   QList<int> get_current_states();
@@ -20,6 +21,7 @@ public:
 private:
   int current_index = 0;
   QString current_date_time();
+  Parameters construct_command_line(Parameters p);
   QProcess *proc;
 private slots:
 };

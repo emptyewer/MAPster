@@ -63,7 +63,7 @@ void MainWindow::on_pairwise_off_clicked(bool checked) {
   UIElements().pairwise_toggle(this, 0);
 }
 
-//void MainWindow::on_folder_tree_clicked(const QModelIndex &index) {
+// void MainWindow::on_folder_tree_clicked(const QModelIndex &index) {
 //  QString path = drivesModel->fileInfo(index).absoluteFilePath();
 //  ui->file_list->setRootIndex(filesModel->setRootPath(path));
 //}
@@ -88,6 +88,11 @@ void MainWindow::add_to_genome_box(Genome g) {
 void MainWindow::on_genome_box_currentIndexChanged(int index) {
   genome_index = index;
   download_genome_if_absent();
+  if (genomes_list[genome_index].type.compare("genome") == 0) {
+    ui->k->setValue(5);
+  } else {
+    ui->k->setValue(10);
+  }
 }
 
 void MainWindow::download_genome_if_absent() {
@@ -178,4 +183,114 @@ void MainWindow::on_run_button_clicked() {
   connect(timer, SIGNAL(timeout()), this, SLOT(run_next_in_queue()));
   timer->start(1000);
   ui->run_button->setEnabled(false);
+}
+
+/* Proper checks to reset GUI parameters that are interlinked with each other
+ *
+*/
+
+void MainWindow::on_nofw_clicked() {
+  if (ui->norc->isChecked()) {
+    if (ui->norc->isChecked()) {
+      ui->norc->setChecked(false);
+    }
+  }
+}
+
+void MainWindow::on_norc_clicked() {
+  if (ui->norc->isChecked()) {
+    if (ui->nofw->isChecked()) {
+      ui->nofw->setChecked(false);
+    }
+  }
+}
+
+void MainWindow::on_k_valueChanged(int arg1) { ui->max_seeds->setValue(arg1); }
+
+void MainWindow::on_ungz_stateChanged(int arg1) {
+  if (ui->ungz->isChecked()) {
+    if (ui->unbz2->isChecked()) {
+      ui->unbz2->setChecked(false);
+    }
+  }
+}
+
+void MainWindow::on_unbz2_stateChanged(int arg1) {
+  if (ui->unbz2->isChecked()) {
+    if (ui->ungz->isChecked()) {
+      ui->ungz->setChecked(false);
+    }
+  }
+}
+
+void MainWindow::on_algz_stateChanged(int arg1) {
+  if (ui->algz->isChecked()) {
+    if (ui->albz2->isChecked()) {
+      ui->unbz2->setChecked(false);
+    }
+  }
+}
+
+void MainWindow::on_albz2_stateChanged(int arg1) {
+  if (ui->albz2->isChecked()) {
+    if (ui->algz->isChecked()) {
+      ui->ungz->setChecked(false);
+    }
+  }
+}
+
+void MainWindow::on_fastq_reads_clicked() {
+  ui->ignore_quals->setChecked(false);
+}
+
+void MainWindow::on_fasta_reads_clicked() {
+  ui->ignore_quals->setChecked(true);
+}
+
+void MainWindow::on_custom_reads_clicked() {
+  ui->ignore_quals->setChecked(true);
+}
+
+void MainWindow::on_un_stateChanged(int arg1) {
+  if (!ui->un->isChecked()) {
+    ui->ungz->setChecked(false);
+    ui->unbz2->setChecked(false);
+    ui->ungz->setEnabled(false);
+    ui->unbz2->setEnabled(false);
+  } else {
+    ui->ungz->setEnabled(true);
+    ui->unbz2->setEnabled(true);
+  }
+}
+
+void MainWindow::on_al_stateChanged(int arg1) {
+  if (!ui->al->isChecked()) {
+    ui->algz->setChecked(false);
+    ui->albz2->setChecked(false);
+    ui->algz->setEnabled(false);
+    ui->albz2->setEnabled(false);
+  } else {
+    ui->algz->setEnabled(true);
+    ui->albz2->setEnabled(true);
+  }
+}
+
+void MainWindow::on_softclipping_stateChanged(int arg1) {
+  if (!ui->softclipping->isChecked()) {
+    ui->sp_mn->setEnabled(false);
+    ui->sp_mx->setEnabled(false);
+    ui->sp_max_lbl->setEnabled(false);
+    ui->sp_min_lbl->setEnabled(false);
+    ui->sp_tail_lbl->setEnabled(false);
+  } else {
+    ui->sp_mn->setEnabled(true);
+    ui->sp_mx->setEnabled(true);
+    ui->sp_max_lbl->setEnabled(true);
+    ui->sp_min_lbl->setEnabled(true);
+    ui->sp_tail_lbl->setEnabled(true);
+  }
+}
+
+void MainWindow::on_jobs_table_clicked(const QModelIndex &index) {
+  UIElements().update_params_table(this, q.get_parameters(index.row()));
 }

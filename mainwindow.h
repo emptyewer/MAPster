@@ -1,12 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include <QMainWindow>
-#include "ui_mainwindow.h"
 #include "download/downloadmanager.h"
 #include "helpers/files.h"
 #include "helpers/includes.h"
 #include "helpers/mystructs.h"
 #include "helpers/runqueue.h"
+#include "ui_mainwindow.h"
+#include <QMainWindow>
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +23,7 @@ public:
   ~MainWindow();
 
 private slots:
-//  void on_folder_tree_clicked(const QModelIndex &index);
+  //  void on_folder_tree_clicked(const QModelIndex &index);
   void on_pairwise_on_clicked(bool checked);
   void on_pairwise_off_clicked(bool checked);
   void on_genome_box_currentIndexChanged(int index);
@@ -36,6 +36,27 @@ private slots:
   void run_next_in_queue();
   void on_clear_queue_button_clicked();
   void output_file_text_changed();
+  void on_nofw_clicked();
+  void on_norc_clicked();
+  void on_k_valueChanged(int arg1);
+  void on_ungz_stateChanged(int arg1);
+  void on_unbz2_stateChanged(int arg1);
+  void on_algz_stateChanged(int arg1);
+  void on_albz2_stateChanged(int arg1);
+
+  void on_fastq_reads_clicked();
+
+  void on_fasta_reads_clicked();
+
+  void on_custom_reads_clicked();
+
+  void on_un_stateChanged(int arg1);
+
+  void on_al_stateChanged(int arg1);
+
+  void on_softclipping_stateChanged(int arg1);
+
+  void on_jobs_table_clicked(const QModelIndex &index);
 
 private:
   void Run();
