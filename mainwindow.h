@@ -58,6 +58,12 @@ private slots:
 
   void on_jobs_table_clicked(const QModelIndex &index);
 
+  void on_genome_clicked();
+
+  void on_rnaseq_clicked();
+
+  void on_shrna_clicked();
+
 private:
   void Run();
   void setupPaths();

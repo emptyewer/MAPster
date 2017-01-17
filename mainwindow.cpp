@@ -135,7 +135,7 @@ void MainWindow::update_jobs_table() {
       QIcon icon(":/images/waiting.png");
       c0->setIcon(icon);
     } else if (states.at(i) == 1) {
-      c0->setText("Running");
+      c0->setText("Mapping");
       QIcon icon(":/images/running.png");
       c0->setIcon(icon);
     } else {
@@ -156,17 +156,20 @@ void MainWindow::run_next_in_queue() {
     q.update_state(current_job, 2);
     current_job += 1;
     if (current_job < total_jobs) {
-      q.update_state(current_job, 1);
-      current_proc = q.run(current_job);
+      if (q.update_state(current_job, 1) == 0) {
+        current_proc = q.run(current_job);
+      }
     } else {
       update_jobs_table();
       timer->stop();
       ui->run_button->setEnabled(true);
+      ui->clear_queue_button->setEnabled(true);
     }
   }
 }
 
 void MainWindow::on_clear_queue_button_clicked() {
+  ui->jobs_table->setRowCount(0);
   ui->jobs_table->clear();
   q.queue.clear();
   q.set_current_index(0);
@@ -175,14 +178,15 @@ void MainWindow::on_clear_queue_button_clicked() {
 void MainWindow::on_run_button_clicked() {
   total_jobs = q.get_jobs_count();
   current_job = 0;
-  q.update_state(current_job, 1);
-  update_jobs_table();
-  current_proc = q.run(current_job);
-
+  if (q.update_state(current_job, 1) == 0) {
+    update_jobs_table();
+    current_proc = q.run(current_job);
+  }
   timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), this, SLOT(run_next_in_queue()));
   timer->start(1000);
   ui->run_button->setEnabled(false);
+  ui->clear_queue_button->setEnabled(false);
 }
 
 /* Proper checks to reset GUI parameters that are interlinked with each other
@@ -293,4 +297,17 @@ void MainWindow::on_softclipping_stateChanged(int arg1) {
 
 void MainWindow::on_jobs_table_clicked(const QModelIndex &index) {
   UIElements().update_params_table(this, q.get_parameters(index.row()));
+}
+
+void MainWindow::on_genome_clicked() { UIElements().setDefaults(this); }
+
+void MainWindow::on_rnaseq_clicked() {
+  UIElements().setDefaults(this);
+  ui->dta->setChecked(true);
+}
+
+void MainWindow::on_shrna_clicked() {
+  UIElements().setDefaults(this);
+  ui->norc->setChecked(true);
+  ui->k->setValue(25);
 }

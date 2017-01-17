@@ -16,6 +16,7 @@ public:
   void setup_other_elements(MainWindow *parent);
   void add_extension_to_output(MainWindow *parent, Files *f);
   void update_params_table(MainWindow *parent, Parameters list);
+  void setDefaults(MainWindow *parent);
   ~UIElements();
 
 private:

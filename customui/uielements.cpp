@@ -19,7 +19,7 @@ QString UIElements::get_read_file_list(VListWidget *list) {
 }
 
 void UIElements::update_params_table(MainWindow *parent, Parameters list) {
-  int count = 12;
+  int count = 22;
   parent->ui->command_line->setText("<hisat exec> " + list.args.join(" "));
   parent->ui->parameter_table->clear();
   parent->ui->parameter_table->setRowCount(count);
@@ -121,6 +121,100 @@ void UIElements::update_params_table(MainWindow *parent, Parameters list) {
     w->setText("Phred64 [--phred64]");
   }
   parent->ui->parameter_table->setItem(11, 1, w);
+  // Row 13
+  w = new QTableWidgetItem;
+  w->setText("Ignore Quality");
+  parent->ui->parameter_table->setItem(12, 0, w);
+  w = new QTableWidgetItem;
+  if (list.ignore_quals) {
+    w->setText("True [--ignore-quals]");
+  } else {
+    w->setText("False [--ignore-quals]");
+  }
+  parent->ui->parameter_table->setItem(12, 1, w);
+  // Row 14
+  w = new QTableWidgetItem;
+  w->setText("Do not align to forward reference");
+  parent->ui->parameter_table->setItem(13, 0, w);
+  w = new QTableWidgetItem;
+  if (list.nofw) {
+    w->setText("True [--nofw]");
+  } else {
+    w->setText("False [--nofw]");
+  }
+  parent->ui->parameter_table->setItem(13, 1, w);
+  // Row 15
+  w = new QTableWidgetItem;
+  w->setText("Do not align to reverse reference");
+  parent->ui->parameter_table->setItem(14, 0, w);
+  w = new QTableWidgetItem;
+  if (list.nofw) {
+    w->setText("True [--norc]");
+  } else {
+    w->setText("False [--norc]");
+  }
+  parent->ui->parameter_table->setItem(14, 1, w);
+  // Row 16
+  w = new QTableWidgetItem;
+  w->setText("Mismatch penalties");
+  parent->ui->parameter_table->setItem(15, 0, w);
+  w = new QTableWidgetItem;
+  w->setText("min: " + QString::number(list.mp_mn) + ", max: " +
+             QString::number(list.mp_mx) + " [--mp]");
+  parent->ui->parameter_table->setItem(15, 1, w);
+  // Row 17
+  w = new QTableWidgetItem;
+  w->setText("Soft Clipping");
+  parent->ui->parameter_table->setItem(16, 0, w);
+  w = new QTableWidgetItem;
+  if (list.soft_clipping) {
+    w->setText("True [--no-softclip]");
+  } else {
+    w->setText("False [--no-softclip]");
+  }
+  parent->ui->parameter_table->setItem(16, 1, w);
+  // Row 18
+  w = new QTableWidgetItem;
+  w->setText("Soft-clipping penalties");
+  parent->ui->parameter_table->setItem(17, 0, w);
+  w = new QTableWidgetItem;
+  w->setText("min: " + QString::number(list.sp_mn) + ", max: " +
+             QString::number(list.sp_mx) + " [--sp]");
+  parent->ui->parameter_table->setItem(17, 1, w);
+  // Row 19
+  w = new QTableWidgetItem;
+  w->setText("Ambiguous Character penalty");
+  parent->ui->parameter_table->setItem(18, 0, w);
+  w = new QTableWidgetItem;
+  w->setText(QString::number(list.np) + " [--np]");
+  parent->ui->parameter_table->setItem(18, 1, w);
+  // Row 20
+  w = new QTableWidgetItem;
+  w->setText("Read gap penalties");
+  parent->ui->parameter_table->setItem(19, 0, w);
+  w = new QTableWidgetItem;
+  w->setText("open: " + QString::number(list.rdg1) + ", extend: " +
+             QString::number(list.rdg2) + " [--rdg]");
+  parent->ui->parameter_table->setItem(19, 1, w);
+  // Row 21
+  w = new QTableWidgetItem;
+  w->setText("Reference gap penalties");
+  parent->ui->parameter_table->setItem(20, 0, w);
+  w = new QTableWidgetItem;
+  w->setText("open: " + QString::number(list.rfg1) + ", extend: " +
+             QString::number(list.rfg2) + " [--rfg]");
+  parent->ui->parameter_table->setItem(20, 1, w);
+  // Row 22
+  w = new QTableWidgetItem;
+  w->setText("Downstream transcriptome assembly");
+  parent->ui->parameter_table->setItem(21, 0, w);
+  w = new QTableWidgetItem;
+  if (list.dta) {
+    w->setText("True [--dta]");
+  } else {
+    w->setText("False [--dta]");
+  }
+  parent->ui->parameter_table->setItem(21, 1, w);
   // Row 8
   //  w = new QTableWidgetItem;
   //  w->setText("Chr prefix");
@@ -168,6 +262,7 @@ Parameters UIElements::get_parameters(MainWindow *parent) {
   params.nofw = parent->ui->nofw->isChecked();
   params.norc = parent->ui->norc->isChecked();
   params.soft_clipping = parent->ui->softclipping->isChecked();
+  params.dta = parent->ui->dta->isChecked();
   // Read Scoring options
   params.mp_mx = parent->ui->mp_mx->value();
   params.mp_mn = parent->ui->mp_mn->value();
@@ -202,13 +297,13 @@ void UIElements::pairwise_toggle(MainWindow *parent, int i) {
   if (i == 0) {
     parent->ui->selected_files_list2->setVisible(false);
     parent->ui->selected_files2_label->setVisible(false);
-    parent->ui->selected_files1_label->setText("Unpaired Reads");
+    parent->ui->selected_files1_label->setText("Unpaired Reads [-U]");
   } else {
     parent->ui->selected_files_list1->setVisible(true);
     parent->ui->selected_files_list2->setVisible(true);
     parent->ui->selected_files2_label->setVisible(true);
-    parent->ui->selected_files1_label->setText("Paired Reads (Set 1)");
-    parent->ui->selected_files2_label->setText("Paired Reads (Set 2)");
+    parent->ui->selected_files1_label->setText("Paired Reads [-1]");
+    parent->ui->selected_files2_label->setText("Paired Reads [-2]");
   }
 }
 
@@ -275,4 +370,42 @@ void UIElements::add_extension_to_output(MainWindow *parent, Files *f) {
     VError e = VError(error_string);
     e.show();
   }
+}
+
+void UIElements::setDefaults(MainWindow *parent) {
+  parent->ui->fasta_reads->setChecked(true);
+  parent->ui->skip_first->setValue(0);
+  parent->ui->align_first->setValue(0);
+  parent->ui->trim5->setValue(0);
+  parent->ui->trim3->setValue(0);
+  parent->ui->ignore_quals->setChecked(false);
+  parent->ui->nofw->setChecked(false);
+  parent->ui->norc->setChecked(false);
+  parent->ui->dta->setChecked(false);
+  parent->ui->mp_mx->setValue(6);
+  parent->ui->mp_mn->setValue(2);
+  parent->ui->sp_mx->setValue(2);
+  parent->ui->sp_mn->setValue(1);
+  parent->ui->np->setValue(1);
+  parent->ui->rdg1->setValue(5);
+  parent->ui->rdg2->setValue(3);
+  parent->ui->rfg1->setValue(5);
+  parent->ui->rfg2->setValue(3);
+  if (parent->genomes_list[parent->genome_index].type.compare("genome") == 0) {
+    parent->ui->k->setValue(5);
+  } else {
+    parent->ui->k->setValue(10);
+  }
+  parent->ui->secondary->setChecked(false);
+  parent->ui->un->setChecked(false);
+  parent->ui->ungz->setChecked(false);
+  parent->ui->unbz2->setChecked(false);
+  parent->ui->al->setChecked(false);
+  parent->ui->algz->setChecked(false);
+  parent->ui->albz2->setChecked(false);
+  parent->ui->time->setChecked(false);
+  parent->ui->quiet->setChecked(false);
+  parent->ui->metrics->setChecked(false);
+  parent->ui->reorder->setChecked(false);
+  parent->ui->chr->setChecked(false);
 }

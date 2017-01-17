@@ -90,7 +90,7 @@
              </size>
             </property>
             <property name="text">
-             <string>Paired Reads (Set 1)</string>
+             <string>Paired Reads [-1]</string>
             </property>
            </widget>
           </item>
@@ -131,7 +131,7 @@
              </size>
             </property>
             <property name="text">
-             <string>Paired Reads (Set 2)</string>
+             <string>Paired Reads [-2]</string>
             </property>
            </widget>
           </item>
@@ -218,7 +218,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Genome</string>
+                <string>Genome [-x]</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -234,7 +234,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Threads</string>
+                <string>Threads [-p]</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -350,7 +350,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Output Filename</string>
+                <string>Output Filename [-S]</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -408,7 +408,7 @@
              <item>
               <widget class="QRadioButton" name="shrna">
                <property name="text">
-                <string>ShRNA</string>
+                <string>CRISPR</string>
                </property>
               </widget>
              </item>
@@ -459,7 +459,7 @@
               <bool>true</bool>
              </property>
              <property name="text">
-              <string>FASTQ (default). Files usually have extension .fq or .fastq.</string>
+              <string>FASTQ. Files usually have extension .fq or .fastq. [-q]</string>
              </property>
              <property name="checked">
               <bool>true</bool>
@@ -472,14 +472,14 @@
               <bool>true</bool>
              </property>
              <property name="text">
-              <string>FASTA. Files usually have extension .fa, .fasta, .mfa, .fna or similar.</string>
+              <string>FASTA. Files usually have extension .fa, .fasta, .mfa, .fna or similar. [-f]</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QRadioButton" name="custom_reads">
              <property name="text">
-              <string>Custom. Reads are files with one input sequence per line</string>
+              <string>Custom. Reads are files with one input sequence per line [-r]</string>
              </property>
             </widget>
            </item>
@@ -506,12 +506,12 @@
             <rect>
              <x>20</x>
              <y>30</y>
-             <width>481</width>
+             <width>501</width>
              <height>20</height>
             </rect>
            </property>
            <property name="text">
-            <string>Input qualities are ASCII chars equal to the Phred quality plus 33 (Illumina)</string>
+            <string>Input qualities are ASCII chars equal to the Phred quality plus 33 [--phred33]</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -522,12 +522,12 @@
             <rect>
              <x>20</x>
              <y>60</y>
-             <width>481</width>
+             <width>501</width>
              <height>20</height>
             </rect>
            </property>
            <property name="text">
-            <string>Input qualities are ASCII chars equal to the Phred quality plus 64</string>
+            <string>Input qualities are ASCII chars equal to the Phred quality plus 64 [--phred64]</string>
            </property>
            <property name="checked">
             <bool>false</bool>
@@ -579,7 +579,7 @@
              </size>
             </property>
             <property name="text">
-             <string>reads or pairs in the input.</string>
+             <string>reads or pairs in the input. [-s/--skip]</string>
             </property>
            </widget>
           </item>
@@ -626,7 +626,7 @@
              </size>
             </property>
             <property name="text">
-             <string>reads or pairs in the input, then stop.</string>
+             <string>reads or pairs in the input, then stop. [-u/--qupto]</string>
             </property>
            </widget>
           </item>
@@ -648,6 +648,11 @@
               <width>91</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
             </property>
             <property name="text">
              <string>Trim</string>
@@ -672,8 +677,13 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
             <property name="text">
-             <string>bases from 5' (left) end of each read before alignment</string>
+             <string>bases from 5' (left) end of each read before alignment. [-5]</string>
             </property>
            </widget>
           </item>
@@ -695,6 +705,11 @@
               <width>91</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
             </property>
             <property name="text">
              <string>Trim</string>
@@ -719,8 +734,13 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
             <property name="text">
-             <string>bases from 3' (right) end of each read before alignment</string>
+             <string>bases from 3' (right) end of each read before alignment. [-3]</string>
             </property>
            </widget>
           </item>
@@ -751,7 +771,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Ignore quality value for penalizing mismatches</string>
+           <string>Ignore quality value for penalizing mismatches. [--ignore-quals]</string>
           </property>
           <property name="checked">
            <bool>false</bool>
@@ -773,7 +793,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Do not align unpaired reads to the forward (Watson) reference strand</string>
+           <string>Do not align unpaired reads to the forward (Watson) reference strand. [--nofw]</string>
           </property>
          </widget>
         </item>
@@ -788,11 +808,25 @@
          <widget class="QCheckBox" name="norc">
           <property name="font">
            <font>
-            <pointsize>12</pointsize>
+            <pointsize>13</pointsize>
            </font>
           </property>
           <property name="text">
-           <string> Do not align unpaired reads against the reverse-complement (Crick) reference strand</string>
+           <string> Do not align unpaired reads with the reverse-complement (Crick) reference. [--norc]</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_22">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="dta">
+          <property name="text">
+           <string>Report alignments tailored for transcript assemblers. [--dta]</string>
           </property>
          </widget>
         </item>
@@ -845,7 +879,7 @@
           <item>
            <widget class="QLabel" name="label_9">
             <property name="text">
-             <string>mismatch penalties</string>
+             <string>mismatch penalties. [--mp]</string>
             </property>
            </widget>
           </item>
@@ -907,7 +941,7 @@
           <item>
            <widget class="QLabel" name="sp_tail_lbl">
             <property name="text">
-             <string>penalties for soft-clipping per base</string>
+             <string>penalties for soft-clipping per base. [--sp]</string>
             </property>
            </widget>
           </item>
@@ -915,42 +949,6 @@
         </item>
         <item>
          <widget class="Line" name="line_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_15">
-          <item>
-           <widget class="QLabel" name="label_15">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>100</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Penalty for positions where read, reference, or both contain an ambiguous character</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="np">
-            <property name="minimum">
-             <number>1</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="Line" name="line_9">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -989,7 +987,7 @@
           <item>
            <widget class="QLabel" name="label_18">
             <property name="text">
-             <string>penalties</string>
+             <string>penalties. [--rdg]</string>
             </property>
            </widget>
           </item>
@@ -1035,122 +1033,47 @@
           <item>
            <widget class="QLabel" name="label_21">
             <property name="text">
-             <string>penalties</string>
+             <string>penalties. [--rfg]</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="fifth_tab">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <attribute name="title">
-        <string>Reporting</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <widget class="Line" name="line_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_15">
           <item>
-           <widget class="QLabel" name="label_22">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>100</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Search for at most </string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="k">
+           <widget class="QLabel" name="label_15">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
               <height>16777215</height>
              </size>
             </property>
-            <property name="value">
-             <number>5</number>
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Penalty for read, reference or both contain an ambiguous character [--np]</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_23">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>100</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>distinct primary alignments for each read</string>
+           <widget class="QSpinBox" name="np">
+            <property name="minimum">
+             <number>1</number>
             </property>
            </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="Line" name="line_12">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_12">
-          <item>
-           <widget class="QLabel" name="label_24">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>100</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Maximum number of seeds that will be extended</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="max_seeds">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="value">
-             <number>5</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="Line" name="line_11">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="secondary">
-          <property name="text">
-           <string>Report secondary alignments</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="Line" name="line_10">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
@@ -1167,7 +1090,7 @@
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>180</height>
+            <height>100</height>
            </size>
           </property>
           <property name="title">
@@ -1177,7 +1100,7 @@
            <item>
             <widget class="QCheckBox" name="un">
              <property name="text">
-              <string>Write unparied reads that fail to align</string>
+              <string>Write unparied reads that fail to align. [--un]</string>
              </property>
             </widget>
            </item>
@@ -1187,7 +1110,7 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>gzip</string>
+              <string>gzip. [--un-gz]</string>
              </property>
             </widget>
            </item>
@@ -1197,7 +1120,7 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>bzip2</string>
+              <string>bzip2. [--un-bz2]</string>
              </property>
             </widget>
            </item>
@@ -1205,18 +1128,11 @@
          </widget>
         </item>
         <item>
-         <widget class="Line" name="line_15">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QGroupBox" name="groupBox_3">
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>180</height>
+            <height>100</height>
            </size>
           </property>
           <property name="title">
@@ -1226,7 +1142,7 @@
            <item>
             <widget class="QCheckBox" name="al">
              <property name="text">
-              <string>Write unparied reads that align at least once</string>
+              <string>Write unparied reads that align at least once. [--al]</string>
              </property>
             </widget>
            </item>
@@ -1236,7 +1152,7 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>gzip</string>
+              <string>gzip. [--al-gz]</string>
              </property>
             </widget>
            </item>
@@ -1246,11 +1162,125 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>bzip2</string>
+              <string>bzip2. [--al-bz2]</string>
              </property>
             </widget>
            </item>
           </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_12">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <item>
+           <widget class="QLabel" name="label_22">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Search for at most </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="k">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="value">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_23">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>distinct primary alignments for each read. [-k]</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <widget class="QLabel" name="label_24">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Maximum number of seeds that will be extended</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="max_seeds">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="value">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_25">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>[--max-seeds]</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_10">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="secondary">
+          <property name="text">
+           <string>Report secondary alignments. [--secondary]</string>
+          </property>
          </widget>
         </item>
         <item>
@@ -1263,7 +1293,7 @@
         <item>
          <widget class="QCheckBox" name="time">
           <property name="text">
-           <string>Print the wall-clock time required to load the index filkes and align the reads</string>
+           <string>Print the wall-clock time required to load the index filkes and align the reads. [-t]</string>
           </property>
          </widget>
         </item>
@@ -1277,7 +1307,7 @@
         <item>
          <widget class="QCheckBox" name="quiet">
           <property name="text">
-           <string>Print nothing besides alignments and serious errors</string>
+           <string>Print nothing besides alignments and serious errors. [--quiet]</string>
           </property>
          </widget>
         </item>
@@ -1291,7 +1321,7 @@
         <item>
          <widget class="QCheckBox" name="metrics">
           <property name="text">
-           <string>Write metrics </string>
+           <string>Write metrics. [--met-file]</string>
           </property>
          </widget>
         </item>
@@ -1305,7 +1335,7 @@
         <item>
          <widget class="QCheckBox" name="reorder">
           <property name="text">
-           <string>Output SAM records in the order of the reads in the original input file</string>
+           <string>Output SAM records in the order of the reads in the original input file. [--reorder]</string>
           </property>
          </widget>
         </item>
@@ -1319,11 +1349,27 @@
         <item>
          <widget class="QCheckBox" name="chr">
           <property name="text">
-           <string>Add &quot;chr&quot; to the reference names in alignment</string>
+           <string>Add &quot;chr&quot; to the reference names in alignment. [--add-chrname/--remove-chrname]</string>
           </property>
          </widget>
         </item>
        </layout>
+       <zorder>groupBox_2</zorder>
+       <zorder>groupBox_3</zorder>
+       <zorder>line_18</zorder>
+       <zorder>time</zorder>
+       <zorder>line_16</zorder>
+       <zorder>quiet</zorder>
+       <zorder>line_14</zorder>
+       <zorder>metrics</zorder>
+       <zorder>line_13</zorder>
+       <zorder>reorder</zorder>
+       <zorder>line_17</zorder>
+       <zorder>chr</zorder>
+       <zorder>secondary</zorder>
+       <zorder>line_10</zorder>
+       <zorder>line_11</zorder>
+       <zorder>line_12</zorder>
       </widget>
      </widget>
     </item>
@@ -1360,7 +1406,7 @@
    <property name="minimumSize">
     <size>
      <width>400</width>
-     <height>339</height>
+     <height>346</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -1499,7 +1545,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Command line</string>
+        <string>Command line execution</string>
        </property>
       </widget>
      </item>
@@ -1519,27 +1565,27 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>40</width>
-           <height>30</height>
+           <width>150</width>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
           <font>
-           <pointsize>18</pointsize>
+           <pointsize>14</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>+</string>
+          <string>Add to Q</string>
          </property>
          <property name="flat">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -1548,27 +1594,27 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>40</width>
-           <height>30</height>
+           <width>150</width>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
           <font>
-           <pointsize>20</pointsize>
+           <pointsize>14</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>-</string>
+          <string>Clear Q</string>
          </property>
          <property name="flat">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -1576,13 +1622,13 @@
         <widget class="QPushButton" name="run_button">
          <property name="minimumSize">
           <size>
-           <width>200</width>
+           <width>100</width>
            <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>16777215</width>
+           <width>150</width>
            <height>40</height>
           </size>
          </property>

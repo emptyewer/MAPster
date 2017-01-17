@@ -112,6 +112,10 @@ Parameters RunQueue::construct_command_line(Parameters p) {
     arguments << "--rfg" << QString::number(p.rfg1) << ","
               << QString::number(p.rfg2);
   }
+  // Downstream transcriptome assembly
+  if (p.dta) {
+    arguments << "--dta";
+  }
   // Max seeds and number of distinct alignments
   if ((p.genome.type.compare("genome") == 0 && p.k != 5 && p.max_seeds != 5) ||
       (p.genome.type.compare("genome") != 0 && p.k != 10 &&
@@ -197,8 +201,12 @@ QList<int> RunQueue::get_current_states() {
 
 int RunQueue::get_jobs_count() { return queue.count(); }
 
-void RunQueue::update_state(int index, int state) {
-  queue[index].state = state;
+int RunQueue::update_state(int index, int state) {
+  if (queue[index].state < state) {
+    queue[index].state = state;
+    return 0;
+  }
+  return 1;
 }
 
 QProcess *RunQueue::run(int index) {

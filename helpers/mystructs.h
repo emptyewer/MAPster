@@ -33,6 +33,7 @@ struct Parameters {
   bool ignore_quals;
   bool nofw;
   bool norc;
+  bool dta;
   // Scoring options
   int mp_mx = 0;
   int mp_mn = 0;
