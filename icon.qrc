@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/maspter.png</file>
+    </qresource>
+</RCC>

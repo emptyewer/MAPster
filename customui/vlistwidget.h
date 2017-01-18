@@ -1,8 +1,8 @@
 #ifndef VLISTWIDGET_H
 #define VLISTWIDGET_H
 
-#include <QListWidget>
 #include "helpers/includes.h"
+#include <QListWidget>
 
 class VListWidget : public QListWidget {
 public:
@@ -14,6 +14,9 @@ protected:
   void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
   void dragMoveEvent(QDragMoveEvent *event) Q_DECL_OVERRIDE;
   void dragLeaveEvent(QDragLeaveEvent *event) Q_DECL_OVERRIDE;
+
+private:
+  bool overlay;
 };
 
 #endif // VLISTWIDGET_H

@@ -311,3 +311,10 @@ void MainWindow::on_shrna_clicked() {
   ui->norc->setChecked(true);
   ui->k->setValue(25);
 }
+
+void MainWindow::on_actionContents_triggered() {
+  QDialog *about = new QDialog(this);
+  Ui_About about_ui;
+  about_ui.setupUi(about);
+  about->exec();
+}

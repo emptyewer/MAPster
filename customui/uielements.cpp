@@ -19,8 +19,9 @@ QString UIElements::get_read_file_list(VListWidget *list) {
 }
 
 void UIElements::update_params_table(MainWindow *parent, Parameters list) {
-  int count = 22;
-  parent->ui->command_line->setText("<hisat exec> " + list.args.join(" "));
+  int count = 27;
+  parent->ui->command_line->setText("<hisat2 executable> " +
+                                    list.args.join(" "));
   parent->ui->parameter_table->clear();
   parent->ui->parameter_table->setRowCount(count);
   // Row 1
@@ -215,6 +216,53 @@ void UIElements::update_params_table(MainWindow *parent, Parameters list) {
     w->setText("False [--dta]");
   }
   parent->ui->parameter_table->setItem(21, 1, w);
+  // Row 23
+  w = new QTableWidgetItem;
+  w->setText("Memory Mapped I/O");
+  parent->ui->parameter_table->setItem(22, 0, w);
+  w = new QTableWidgetItem;
+  if (list.mm) {
+    w->setText("True [--mm]");
+  } else {
+    w->setText("False [--mm]");
+  }
+  parent->ui->parameter_table->setItem(22, 1, w);
+  // Row 24
+  w = new QTableWidgetItem;
+  w->setText("Distinct Primary Alignments");
+  parent->ui->parameter_table->setItem(23, 0, w);
+  w = new QTableWidgetItem;
+  w->setText(QString::number(list.k) + " [-k <int>]");
+  parent->ui->parameter_table->setItem(23, 1, w);
+  // Row 25
+  w = new QTableWidgetItem;
+  w->setText("Maximum Seed Extension");
+  parent->ui->parameter_table->setItem(24, 0, w);
+  w = new QTableWidgetItem;
+  w->setText(QString::number(list.max_seeds) + " [--max-seeds <int>]");
+  parent->ui->parameter_table->setItem(24, 1, w);
+  // Row 26
+  w = new QTableWidgetItem;
+  w->setText("Report Secondary Alignments");
+  parent->ui->parameter_table->setItem(25, 0, w);
+  w = new QTableWidgetItem;
+  if (list.secondary) {
+    w->setText("True [--secondary]");
+  } else {
+    w->setText("False [--secondary]");
+  }
+  parent->ui->parameter_table->setItem(25, 1, w);
+  // Row 27
+  w = new QTableWidgetItem;
+  w->setText("Print Times");
+  parent->ui->parameter_table->setItem(26, 0, w);
+  w = new QTableWidgetItem;
+  if (list.time) {
+    w->setText("True [--time]");
+  } else {
+    w->setText("False [--time]");
+  }
+  parent->ui->parameter_table->setItem(26, 1, w);
   // Row 8
   //  w = new QTableWidgetItem;
   //  w->setText("Chr prefix");
@@ -287,9 +335,11 @@ Parameters UIElements::get_parameters(MainWindow *parent) {
   params.al = parent->ui->al->isChecked();
   params.al_gz = parent->ui->algz->isChecked();
   params.al_bz2 = parent->ui->albz2->isChecked();
+  params.quiet = parent->ui->quiet->isChecked();
   params.metrics = parent->ui->metrics->isChecked();
   params.chr = parent->ui->chr->isChecked();
   params.reorder = parent->ui->reorder->isChecked();
+  params.mm = parent->ui->mm->isChecked();
   return params;
 }
 

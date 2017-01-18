@@ -83,6 +83,37 @@
         <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/hg38_tran.tar.gz</url>
         <internalname>hg38_tran/genome_tran</internalname>
     </organism>
+    <organism species="Homo sapiens">
+        <name>Ensembl GRCh37</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch37.tar.gz</url>
+        <internalname>grch37/genome</internalname>
+    </organism>
+    
+    <organism species="Homo sapiens">
+        <name>Ensembl GRCh37</name>
+        <type>genome + snp</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch37_snp.tar.gz</url>
+        <internalname>grch37_snp/genome_snp</internalname>
+    </organism>
+    <organism species="Homo sapiens">
+        <name>Ensembl GRCh37</name>
+        <type>genome + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch37_tran.tar.gz</url>
+        <internalname>grch37_tran/genome_tran</internalname>
+    </organism>
+    <organism species="Homo sapiens">
+        <name>Ensembl GRCh37</name>
+        <type>genome + snp + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch37_snp_tran.tar.gz</url>
+        <internalname>grch37_snp_tran/genome_snp_tran</internalname>
+    </organism>
+    <organism species="Homo sapiens">
+        <name>UCSC hg19</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/hg19.tar.gz</url>
+        <internalname>hg19/genome</internalname>
+    </organism>
     <organism species="Drosophila melanogaster">
         <name>Ensembl BDGP6</name>
         <type>genome</type>
@@ -95,4 +126,36 @@
         <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/bdgp6_tran.tar.gz</url>
         <internalname>bdgp6_tran/genome_tran</internalname>
     </organism>
+    <organism species="Drosophila melanogaster">
+        <name>UCSC dm6</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/dm6.tar.gz</url>
+        <internalname>dm6/genome</internalname>
+    </organism>
+    <organism species="Rattus norvegicus">
+        <name>UCSC rn6</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/rn6.tar.gz</url>
+        <internalname>rn6/genome</internalname>
+    </organism>
+    
+    <organism species="Caenorhabditis elegans">
+        <name>Ensembl WBcel235</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/wbcel235.tar.gz</url>
+        <internalname>wbcel235/genome</internalname>
+    </organism>
+    <organism species="Caenorhabditis elegans">
+        <name>Ensembl WBcel235</name>
+        <type>genome + transcripts</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/wbcel235_tran.tar.gz</url>
+        <internalname>wbcel235_tran/genome_tran</internalname>
+    </organism>
+    <organism species="Caenorhabditis elegans">
+        <name>UCSC ce10</name>
+        <type>genome</type>
+        <url>ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/ce10.tar.gz</url>
+        <internalname>ce10/genome</internalname>
+    </organism>
+    
 </organisms>

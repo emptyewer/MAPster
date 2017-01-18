@@ -7,6 +7,7 @@
 VListWidget::VListWidget(QWidget *parent) {
   setAcceptDrops(true);
   setAutoFillBackground(true);
+  overlay = false;
 }
 
 void VListWidget::dropEvent(QDropEvent *event) {
@@ -25,8 +26,9 @@ void VListWidget::dragEnterEvent(QDragEnterEvent *event) {
   if (mimeData->hasUrls()) {
     QList<QUrl> urlList = mimeData->urls();
     QString text;
-    for (int i = 0; i < urlList.size() && i < 32; ++i)
+    for (int i = 0; i < urlList.size() && i < 32; ++i) {
       text += urlList.at(i).path();
+    }
     QFileInfo fileInfo(text);
     if (fileInfo.suffix().compare("fastq") == 0 ||
         fileInfo.suffix().compare("gz") == 0 ||

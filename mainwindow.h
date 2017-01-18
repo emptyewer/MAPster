@@ -5,6 +5,7 @@
 #include "helpers/includes.h"
 #include "helpers/mystructs.h"
 #include "helpers/runqueue.h"
+#include "ui_about.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 
@@ -63,6 +64,8 @@ private slots:
   void on_rnaseq_clicked();
 
   void on_shrna_clicked();
+
+  void on_actionContents_triggered();
 
 private:
   void Run();

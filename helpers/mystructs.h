@@ -34,6 +34,7 @@ struct Parameters {
   bool nofw;
   bool norc;
   bool dta;
+  bool mm;
   // Scoring options
   int mp_mx = 0;
   int mp_mn = 0;

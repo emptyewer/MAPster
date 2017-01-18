@@ -42,10 +42,10 @@
        <bool>false</bool>
       </property>
       <property name="tabPosition">
-       <enum>QTabWidget::West</enum>
+       <enum>QTabWidget::North</enum>
       </property>
       <property name="tabShape">
-       <enum>QTabWidget::Triangular</enum>
+       <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
@@ -57,7 +57,10 @@
        </size>
       </property>
       <property name="elideMode">
-       <enum>Qt::ElideRight</enum>
+       <enum>Qt::ElideMiddle</enum>
+      </property>
+      <property name="usesScrollButtons">
+       <bool>false</bool>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -66,7 +69,7 @@
        <bool>false</bool>
       </property>
       <property name="movable">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="tabBarAutoHide">
        <bool>false</bool>
@@ -96,28 +99,16 @@
           </item>
           <item>
            <widget class="VListWidget" name="selected_files_list1">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="acceptDrops">
+            <property name="isWrapping" stdset="0">
              <bool>true</bool>
             </property>
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
+            <property name="spacing">
+             <number>4</number>
             </property>
-            <property name="showDropIndicator" stdset="0">
+            <property name="uniformItemSizes">
              <bool>true</bool>
             </property>
-            <property name="dragDropMode">
-             <enum>QAbstractItemView::InternalMove</enum>
-            </property>
-            <property name="defaultDropAction">
-             <enum>Qt::MoveAction</enum>
-            </property>
-            <property name="alternatingRowColors">
+            <property name="wordWrap">
              <bool>true</bool>
             </property>
            </widget>
@@ -137,25 +128,16 @@
           </item>
           <item>
            <widget class="VListWidget" name="selected_files_list2">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="acceptDrops">
+            <property name="isWrapping" stdset="0">
              <bool>true</bool>
             </property>
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
+            <property name="spacing">
+             <number>4</number>
             </property>
-            <property name="dragDropMode">
-             <enum>QAbstractItemView::InternalMove</enum>
+            <property name="uniformItemSizes">
+             <bool>true</bool>
             </property>
-            <property name="defaultDropAction">
-             <enum>Qt::MoveAction</enum>
-            </property>
-            <property name="alternatingRowColors">
+            <property name="wordWrap">
              <bool>true</bool>
             </property>
            </widget>
@@ -179,7 +161,7 @@
              </size>
             </property>
             <property name="title">
-             <string>Main Arguments</string>
+             <string>Required Parameters</string>
             </property>
             <layout class="QGridLayout" name="gridLayout">
              <property name="leftMargin">
@@ -201,7 +183,11 @@
               <number>0</number>
              </property>
              <item row="1" column="2">
-              <widget class="QComboBox" name="genome_box"/>
+              <widget class="QComboBox" name="genome_box">
+               <property name="toolTip">
+                <string/>
+               </property>
+              </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="genome_label">
@@ -385,7 +371,7 @@
              </size>
             </property>
             <property name="title">
-             <string>Presets</string>
+             <string>Parameter Presets</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_12">
              <item>
@@ -559,7 +545,7 @@
              <string>Skip the first </string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -606,7 +592,7 @@
              <string>Align the first </string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -658,7 +644,7 @@
              <string>Trim</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -715,7 +701,7 @@
              <string>Trim</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -745,13 +731,6 @@
            </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="Line" name="line_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
@@ -830,6 +809,23 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="Line" name="line_15">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="mm">
+          <property name="text">
+           <string>Memory Mapped I/O to load the index file.  [--mm]</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="fourth_tab">
@@ -895,7 +891,7 @@
         <item>
          <widget class="QCheckBox" name="softclipping">
           <property name="text">
-           <string>Allow soft-clipping</string>
+           <string>Allow soft-clipping [--no-softclip]</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -1062,7 +1058,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Penalty for read, reference or both contain an ambiguous character [--np]</string>
+             <string>Penalty for read, reference or both containing an ambiguous character</string>
             </property>
            </widget>
           </item>
@@ -1070,6 +1066,13 @@
            <widget class="QSpinBox" name="np">
             <property name="minimum">
              <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>[--np]</string>
             </property>
            </widget>
           </item>
@@ -1321,7 +1324,7 @@
         <item>
          <widget class="QCheckBox" name="metrics">
           <property name="text">
-           <string>Write metrics. [--met-file]</string>
+           <string>Write metrics every 5 seconds. [--met-file]</string>
           </property>
          </widget>
         </item>
@@ -1350,6 +1353,9 @@
          <widget class="QCheckBox" name="chr">
           <property name="text">
            <string>Add &quot;chr&quot; to the reference names in alignment. [--add-chrname/--remove-chrname]</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -1384,21 +1390,12 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuParameters">
-    <property name="title">
-     <string>Parameters</string>
-    </property>
-    <addaction name="actionLoad"/>
-    <addaction name="actionSave"/>
-    <addaction name="separator"/>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>About</string>
     </property>
     <addaction name="actionContents"/>
    </widget>
-   <addaction name="menuParameters"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -1437,12 +1434,15 @@
         </font>
        </property>
        <property name="text">
-        <string>Jobs in Queue</string>
+        <string>Jobs</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QTableWidget" name="jobs_table">
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
        </property>
@@ -1502,7 +1502,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Parameters</string>
+        <string>Job Parameters</string>
        </property>
       </widget>
      </item>
@@ -1513,8 +1513,20 @@
          <pointsize>11</pointsize>
         </font>
        </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustIgnored</enum>
+       </property>
        <property name="alternatingRowColors">
         <bool>true</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::NoSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
        </property>
        <property name="cornerButtonEnabled">
         <bool>true</bool>
@@ -1545,7 +1557,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Command line execution</string>
+        <string>Job Command</string>
        </property>
       </widget>
      </item>
@@ -1555,6 +1567,9 @@
         <font>
          <pointsize>11</pointsize>
         </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

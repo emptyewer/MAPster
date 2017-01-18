@@ -58,9 +58,13 @@ void Files::create_documents_folder() {
 }
 
 void Files::untar_files_mac(Genome g) {
-  QString command = "tar xvfz \"" + get_genome_filepath(g) +"\" -C \"" + get_mapster_genomes_dir() + "\"" ;
+  QString command = "tar xvfz \"" + get_genome_filepath(g) + "\" -C \"" +
+                    get_mapster_genomes_dir() + "\"";
   string command_str = command.toStdString();
   system(command_str.c_str());
+  QString remove = "rm -f \"" + get_genome_filepath(g) + "\"";
+  string remove_str = remove.toStdString();
+  system(remove_str.c_str());
 }
 
 void Files::extract(const char *filename) {
@@ -80,10 +84,10 @@ void Files::extract(const char *filename) {
   if (r != ARCHIVE_OK)
     exit(1);
   while (archive_read_next_header(a, &entry) == ARCHIVE_OK) {
-    printf("%s\\n",archive_entry_pathname(entry));
-    archive_read_data_skip(a);  // Note 2
+    printf("%s\\n", archive_entry_pathname(entry));
+    archive_read_data_skip(a); // Note 2
   }
-  r = archive_read_free(a);  // Note 3
+  r = archive_read_free(a); // Note 3
 }
 
 QVector<Genome> Files::get_genomes_list() {

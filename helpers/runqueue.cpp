@@ -32,6 +32,8 @@ Parameters RunQueue::construct_command_line(Parameters p) {
 
   QString genome_path =
       QDir(f.get_mapster_genomes_dir()).filePath(p.genome.internal_name);
+  QString fname = QFileInfo(output_filename).baseName();
+
   QStringList arguments;
   if (p.pairwise == true) {
     arguments << "-x" << genome_path << "-1" << p.reads1 << "-2" << p.reads2
@@ -134,21 +136,30 @@ Parameters RunQueue::construct_command_line(Parameters p) {
   // Write unparied reads that fail to align
   if (p.un) {
     if (p.un_gz) {
-      arguments << "--un-gz" << output_path;
+      arguments << "--un-gz"
+                << QDir(output_path).filePath(fname + "_unpaired_once.sam.gz");
     } else if (p.un_bz2) {
-      arguments << "--un-bz2" << output_path;
+      arguments << "--un-bz2"
+                << QDir(output_path).filePath(fname + "_unpaired_once.sam.bz2");
     } else {
-      arguments << "--un" << output_path;
+      arguments << "--un"
+                << QDir(output_path).filePath(fname + "_unpaired_once.sam");
     }
   }
   // Write unparied reads that align at least once
   if (p.al) {
     if (p.al_gz) {
-      arguments << "--al-gz" << output_path;
+      arguments
+          << "--al-gz"
+          << QDir(output_path).filePath(fname + "_unpaired_failed.sam.gz");
     } else if (p.al_bz2) {
-      arguments << "--al-bz2" << output_path;
+      arguments
+          << "--al-bz2"
+          << QDir(output_path).filePath(fname + "_unpaired_failed.sam.bz2");
     } else {
-      arguments << "--al" << output_path;
+      arguments
+          << "--al"
+          << QDir(output_path).filePath(fname + "_unpaired_failed.sam.gz");
     }
   }
   // Print only erros and alignments
@@ -157,7 +168,9 @@ Parameters RunQueue::construct_command_line(Parameters p) {
   }
   // Metrics
   if (p.metrics) {
-    arguments << "--met-file" << output_path;
+    arguments << "--met-file"
+              << QDir(output_path).filePath(fname + "_metrics.txt");
+    arguments << "--met" << QString::number(5);
   }
   // Add chr prefix
   if (p.chr) {
@@ -168,6 +181,10 @@ Parameters RunQueue::construct_command_line(Parameters p) {
   // Reorder SAM records
   if (p.reorder) {
     arguments << "--reorder";
+  }
+  // Memory Mapped IO
+  if (p.mm) {
+    arguments << "--mm";
   }
   p.args = arguments;
   return p;
