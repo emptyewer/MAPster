@@ -36,6 +36,9 @@ void MainWindow::finished() {
   ui->progress_bar->setVisible(false);
   ui->download_label->setVisible(false);
   ui->run_button->setEnabled(true);
+  ui->tabs->setEnabled(true);
+  ui->add_to_queue_button->setEnabled(true);
+  ui->clear_queue_button->setEnabled(true);
 }
 
 void MainWindow::setupSlots() {
@@ -104,7 +107,6 @@ void MainWindow::download_genome_if_absent() {
     if (QFile(genome_file_path).exists()) {
       f.untar_files_mac(genomes_list[genome_index]);
     } else {
-      qDebug() << "Doesn't Exist";
       mManager->download(f.get_genome_url(genomes_list[genome_index]),
                          genome_file_path);
       d_label = "Downloading " + genomes_list[genome_index].name + " (" +
@@ -112,8 +114,11 @@ void MainWindow::download_genome_if_absent() {
                 genomes_list[genome_index].type + ") ...";
       ui->download_label->setText(d_label);
       ui->run_button->setEnabled(false);
+      ui->tabs->setEnabled(false);
       ui->progress_bar->setVisible(true);
       ui->download_label->setVisible(true);
+      ui->add_to_queue_button->setEnabled(false);
+      ui->clear_queue_button->setEnabled(false);
     }
   }
 }
