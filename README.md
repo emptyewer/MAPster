@@ -3,7 +3,7 @@ A GUI frontend to map NGS sequencing data using HISAT2.
 
 # Features
 * Dynamic queuing to add mapping jobs on the fly
-* Presets for processing: Genomic, RNASeq, shRNA 
+* Presets for processing: Genomic, RNASeq, shRNA data
 * Loading mapping parameters from previous mapping runs
 * Autodownload indexed reference libraries
 * Mapping parameter previews
