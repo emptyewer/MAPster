@@ -1,7 +1,15 @@
 # MAPster
+A GUI frontend to map NGS sequencing data using HISAT2. 
+
+# Features
+* Dynamic queuing to add mapping jobs on the fly
+* Presets for processing: Genomic, RNASeq, shRNA 
+* Loading mapping parameters from previous mapping runs
+* Autodownload indexed reference libraries
+* Mapping parameter previews
+* Multi-threading
 
 # License
----
 Copyright (c) 2016 Venkatramanan Krishnamani, Robert C. Piper, Mark Stamnes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
