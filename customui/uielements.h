@@ -10,6 +10,7 @@ class UIElements {
 public:
   UIElements();
   static Parameters get_parameters(MainWindow *parent);
+  void set_parameters(MainWindow *parent, QStringList p);
   void pairwise_toggle(MainWindow *parent, int i);
   //  QFileSystemModel* setup_folder_view(MainWindow *parent);
   //  QFileSystemModel* setup_files_view(MainWindow *parent);

@@ -891,7 +891,7 @@
         <item>
          <widget class="QCheckBox" name="softclipping">
           <property name="text">
-           <string>Allow soft-clipping [--no-softclip]</string>
+           <string>Allow soft-clipping [!--no-softclip]</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -1396,6 +1396,13 @@
     </property>
     <addaction name="actionContents"/>
    </widget>
+   <widget class="QMenu" name="menuLoad">
+    <property name="title">
+     <string>Load</string>
+    </property>
+    <addaction name="actionParameters"/>
+   </widget>
+   <addaction name="menuLoad"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -1682,6 +1689,11 @@
   <action name="actionLoad">
    <property name="text">
     <string>Load...</string>
+   </property>
+  </action>
+  <action name="actionParameters">
+   <property name="text">
+    <string>Parameters...</string>
    </property>
   </action>
  </widget>

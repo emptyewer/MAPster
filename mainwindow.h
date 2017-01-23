@@ -67,6 +67,8 @@ private slots:
 
   void on_actionContents_triggered();
 
+  void on_actionParameters_triggered();
+
 private:
   void Run();
   void setupPaths();

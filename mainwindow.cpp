@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "customui/uielements.h"
+#include <fstream>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -322,4 +324,29 @@ void MainWindow::on_actionContents_triggered() {
   Ui_About about_ui;
   about_ui.setupUi(about);
   about->exec();
+}
+
+void MainWindow::on_actionParameters_triggered() {
+  QString fileName = QFileDialog::getOpenFileName(
+      this, tr("SAM files"),
+      QStandardPaths::locate(QStandardPaths::HomeLocation, QString(),
+                             QStandardPaths::LocateDirectory),
+      tr("SAM Files (*.sam)"));
+  qDebug() << fileName;
+  std::ifstream file(fileName.toStdString());
+  if (!file.is_open()) {
+    std::cerr << "Failed to open file!\n";
+  }
+  const std::string needle = "@PG";
+  std::string haystack;
+  while (std::getline(file, haystack)) {
+    if (haystack.find(needle) != std::string::npos) {
+      break;
+    }
+  }
+  QString commandline =
+      QString::fromStdString(haystack).split("\t").last().split("\"").at(1);
+  QStringList commandlist = commandline.split(" ");
+  qDebug() << commandlist;
+  UIElements().set_parameters(this, commandlist);
 }

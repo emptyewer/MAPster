@@ -343,6 +343,175 @@ Parameters UIElements::get_parameters(MainWindow *parent) {
   return params;
 }
 
+void UIElements::set_parameters(MainWindow *parent, QStringList p) {
+  // Set thread count
+  if (p.contains("-p")) {
+    parent->ui->threads_sbox->setValue(p.at(p.indexOf("-p") + 1).toInt());
+  }
+  // Unpaired or Paired
+  if (p.contains("-U")) {
+    parent->ui->pairwise_off->setChecked(true);
+    pairwise_toggle(parent, 0);
+  } else {
+    parent->ui->pairwise_off->setChecked(false);
+    pairwise_toggle(parent, 1);
+  }
+  // Set Genome
+  if (p.contains("-x")) {
+    QFileInfo fi(p.at(p.indexOf("-x") + 1));
+    int i = 0;
+    BOOST_FOREACH (Genome g, parent->genomes_list) {
+      if (fi.filePath().contains(g.internal_name)) {
+        parent->ui->genome_box->setCurrentIndex(i);
+        break;
+      }
+      i += 1;
+    }
+  }
+  // Input format
+  if (p.contains("-q")) {
+    parent->ui->fastq_reads->setChecked(true);
+  } else if (p.contains("-f")) {
+    parent->ui->fasta_reads->setChecked(true);
+  } else if (p.contains("-r")) {
+    parent->ui->custom_reads->setChecked(true);
+  }
+  // Skip
+  if (p.contains("-s")) {
+    parent->ui->skip_first->setValue(p.at(p.indexOf("-s") + 1).toInt());
+  }
+  // Align
+  if (p.contains("-u")) {
+    parent->ui->align_first->setValue(p.at(p.indexOf("-u") + 1).toInt());
+  }
+  // Trim 5
+  if (p.contains("-5")) {
+    parent->ui->trim5->setValue(p.at(p.indexOf("-5") + 1).toInt());
+  }
+  // Trim 3
+  if (p.contains("-3")) {
+    parent->ui->trim3->setValue(p.at(p.indexOf("-3") + 1).toInt());
+  }
+  // Phread
+  if (p.contains("--phred33")) {
+    parent->ui->phread33->setChecked(true);
+  } else {
+    parent->ui->phread64->setChecked(true);
+  }
+  // Ignore quality values
+  if (p.contains("--ignore-quals")) {
+    parent->ui->ignore_quals->setChecked(true);
+  }
+  // no forward strand matching
+  if (p.contains("--nofw")) {
+    parent->ui->nofw->setChecked(true);
+  }
+  // No reverse complement matching
+  if (p.contains("--norc")) {
+    parent->ui->norc->setChecked(true);
+  }
+  // Set mismatch penalties
+  if (p.contains("--mp")) {
+    QStringList t = p.at(p.indexOf("--mp") + 1).split(",");
+    parent->ui->mp_mx->setValue(t.at(0).toInt());
+    parent->ui->mp_mx->setValue(t.at(1).toInt());
+  }
+  // Set mismatch penalties
+  if (p.contains("--sp")) {
+    QStringList t = p.at(p.indexOf("--sp") + 1).split(",");
+    parent->ui->mp_mx->setValue(t.at(0).toInt());
+    parent->ui->mp_mx->setValue(t.at(1).toInt());
+  }
+  // No soft-clipping
+  if (p.contains("--no-softclip")) {
+    parent->ui->softclipping->setChecked(false);
+  }
+  // Penalty for ambiguous character
+  if (p.contains("--np")) {
+    parent->ui->np->setValue(p.at(p.indexOf("--np") + 1).toInt());
+  }
+  // Read gap penalties
+  if (p.contains("--rdg")) {
+    QStringList t = p.at(p.indexOf("--rdg") + 1).split(",");
+    parent->ui->rdg1->setValue(t.at(0).toInt());
+    parent->ui->rdg2->setValue(t.at(1).toInt());
+  }
+  // Reference gap penalties
+  if (p.contains("--rfg")) {
+    QStringList t = p.at(p.indexOf("--rfg") + 1).split(",");
+    parent->ui->rfg1->setValue(t.at(0).toInt());
+    parent->ui->rfg2->setValue(t.at(1).toInt());
+  }
+  // Downstream transcriptome assembly
+  if (p.contains("--dta")) {
+    parent->ui->dta->setChecked(true);
+  }
+  // Max seeds and number of distinct alignments
+  if (p.contains("-k")) {
+    parent->ui->k->setValue(p.at(p.indexOf("-k") + 1).toInt());
+  }
+  if (p.contains("--max-seeds")) {
+    parent->ui->max_seeds->setValue(p.at(p.indexOf("--max-seeds") + 1).toInt());
+  }
+  // Report secondary alignments
+  if (p.contains("--secondary")) {
+    parent->ui->secondary->setChecked(true);
+  }
+  // Write time required to load the index files and align the reads
+  if (p.contains("-t")) {
+    parent->ui->time->setChecked(true);
+  }
+  // Write unpaired reads that fail to align
+  if (p.contains("--un")) {
+    parent->ui->un->setChecked(true);
+  }
+  if (p.contains("--un-gz")) {
+    parent->ui->ungz->setChecked(true);
+  }
+  if (p.contains("--un-bz2")) {
+    parent->ui->unbz2->setChecked(true);
+  }
+  // Write unparied reads that align at least once
+  if (p.contains("--al")) {
+    parent->ui->al->setChecked(true);
+  }
+  if (p.contains("--al-gz")) {
+    parent->ui->algz->setChecked(true);
+  }
+  if (p.contains("--al-bz2")) {
+    parent->ui->albz2->setChecked(true);
+  }
+  // Print only erros and alignments
+  if (p.contains("--quiet")) {
+    parent->ui->quiet->setChecked(true);
+  }
+  // Metrics
+  if (p.contains("--met-file")) {
+    parent->ui->metrics->setChecked(true);
+  }
+  // Add chr prefix
+  if (p.contains("--add-chrname")) {
+    parent->ui->chr->setChecked(true);
+  } else {
+    parent->ui->chr->setChecked(false);
+  }
+  // Reorder SAM records
+  if (p.contains("--reorder")) {
+    parent->ui->reorder->setChecked(true);
+  }
+  // Memory Mapped IO
+  if (p.contains("--mm")) {
+    parent->ui->mm->setChecked(true);
+  }
+  // Preset Parameters
+  if (parent->ui->dta->isChecked()) {
+    parent->ui->rnaseq->setChecked(true);
+  }
+  if (parent->ui->norc->isChecked() && parent->ui->k->value() > 5) {
+    parent->ui->shrna->setChecked(true);
+  }
+}
+
 void UIElements::pairwise_toggle(MainWindow *parent, int i) {
   if (i == 0) {
     parent->ui->selected_files_list2->setVisible(false);

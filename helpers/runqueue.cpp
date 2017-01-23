@@ -123,7 +123,7 @@ Parameters RunQueue::construct_command_line(Parameters p) {
       (p.genome.type.compare("genome") != 0 && p.k != 10 &&
        p.max_seeds != 10)) {
     arguments << "-k" << QString::number(p.k);
-    arguments << "max-seed" << QString::number(p.max_seeds);
+    arguments << "--max-seeds" << QString::number(p.max_seeds);
   }
   // Report secondary alignments
   if (p.secondary) {
