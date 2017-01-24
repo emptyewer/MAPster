@@ -42,7 +42,8 @@ HEADERS  += mainwindow.h \
     helpers/error.h
 
 FORMS    += mainwindow.ui \
-    about.ui
+    about.ui \
+    preferences.ui
 
 DISTFILES += \
     images/done.png \

@@ -6,21 +6,22 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
+  prefs = new QDialog(this);
+  preferences_ui->setupUi(prefs);
   //  setupViews();
   setupSlots();
   f = Files();
   f.create_documents_folder();
-
   UIElements().setup_other_elements(this);
-
   q = RunQueue();
   populate_genomes_list();
   genome_index = 0;
 }
 
 MainWindow::~MainWindow() {
-  delete ui;
+  delete prefs;
   delete mManager;
+  delete ui;
 }
 
 void MainWindow::addLine(QString qsLine) { qDebug() << qsLine; }
@@ -50,6 +51,10 @@ void MainWindow::setupSlots() {
   connect(mManager, SIGNAL(progress(int)), this, SLOT(progress(int)));
   connect(ui->output_filename, SIGNAL(editingFinished()),
           SLOT(output_file_text_changed()));
+  connect(preferences_ui->ref_button, SIGNAL(clicked()), this,
+          SLOT(ref_button_clicked()));
+  connect(preferences_ui->output_button, SIGNAL(clicked()), this,
+          SLOT(output_button_clicked()));
 }
 
 void MainWindow::output_file_text_changed() {
@@ -332,21 +337,71 @@ void MainWindow::on_actionParameters_triggered() {
       QStandardPaths::locate(QStandardPaths::HomeLocation, QString(),
                              QStandardPaths::LocateDirectory),
       tr("SAM Files (*.sam)"));
-  qDebug() << fileName;
-  std::ifstream file(fileName.toStdString());
-  if (!file.is_open()) {
-    std::cerr << "Failed to open file!\n";
+  if (QFileInfo(fileName).exists()) {
+    std::ifstream file(fileName.toStdString());
+    if (!file.is_open()) {
+      std::cerr << "Failed to open file!\n";
+    }
+    const std::string needle = "@PG";
+    std::string haystack;
+    while (std::getline(file, haystack)) {
+      if (haystack.find(needle) != std::string::npos) {
+        break;
+      }
+    }
+    QString commandline =
+        QString::fromStdString(haystack).split("\t").last().split("\"").at(1);
+    QStringList commandlist = commandline.split(" ");
+    qDebug() << commandlist;
+    UIElements().set_parameters(this, commandlist);
   }
-  const std::string needle = "@PG";
-  std::string haystack;
-  while (std::getline(file, haystack)) {
-    if (haystack.find(needle) != std::string::npos) {
-      break;
+}
+
+void MainWindow::on_actionDefault_Parameters_triggered() {
+  ui->genome->setChecked(true);
+  UIElements().setDefaults(this);
+}
+
+void MainWindow::on_actionSet_Default_Paths_triggered() {
+  preferences_ui->ref_path->setText(f.get_mapster_genomes_dir());
+  preferences_ui->output_path->setText(f.get_mapster_output_dir());
+  prefs->exec();
+}
+
+void MainWindow::ref_button_clicked() {
+  QString dirPath = QFileDialog::getExistingDirectory(
+      this, "Choose Default Genome Directory",
+      QStandardPaths::locate(QStandardPaths::DocumentsLocation, QString(),
+                             QStandardPaths::LocateDirectory));
+  if (QFileInfo(dirPath).exists()) {
+    preferences_ui->ref_path->setText(dirPath);
+    if (dirPath.compare(f.get_mapster_genomes_dir()) != 0) {
+      QFile file(QDir(f.get_mapster_configs_dir()).filePath("genome_dir"));
+      file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate);
+      QTextStream out(&file);
+      out << dirPath;
+      file.close();
     }
   }
-  QString commandline =
-      QString::fromStdString(haystack).split("\t").last().split("\"").at(1);
-  QStringList commandlist = commandline.split(" ");
-  qDebug() << commandlist;
-  UIElements().set_parameters(this, commandlist);
+}
+
+void MainWindow::output_button_clicked() {
+  QString dirPath = QFileDialog::getExistingDirectory(
+      this, "Choose Default Output Directory",
+      QStandardPaths::locate(QStandardPaths::DocumentsLocation, QString(),
+                             QStandardPaths::LocateDirectory));
+  if (QFileInfo(dirPath).exists()) {
+    preferences_ui->output_path->setText(dirPath);
+    if (dirPath.compare(f.get_mapster_output_dir()) != 0) {
+      QFile file(QDir(f.get_mapster_configs_dir()).filePath("output_dir"));
+      file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate);
+      QTextStream out(&file);
+      out << dirPath;
+      file.close();
+    }
+  }
+}
+
+void MainWindow::on_open_output_clicked() {
+  QProcess::startDetached("open " + f.get_mapster_output_dir());
 }

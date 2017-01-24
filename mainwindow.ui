@@ -182,21 +182,24 @@
              <property name="verticalSpacing">
               <number>0</number>
              </property>
-             <item row="1" column="2">
-              <widget class="QComboBox" name="genome_box">
-               <property name="toolTip">
-                <string/>
+             <item row="2" column="2">
+              <widget class="QSpinBox" name="threads_sbox">
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>64</number>
+               </property>
+               <property name="value">
+                <number>2</number>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="genome_label">
-               <property name="minimumSize">
-                <size>
-                 <width>100</width>
-                 <height>20</height>
-                </size>
-               </property>
+             <item row="3" column="0">
+              <widget class="QLabel" name="output_label">
                <property name="maximumSize">
                 <size>
                  <width>150</width>
@@ -204,26 +207,17 @@
                 </size>
                </property>
                <property name="text">
-                <string>Genome [-x]</string>
+                <string>Output Filename [-S]</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="threads_label">
-               <property name="maximumSize">
-                <size>
-                 <width>150</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Threads [-p]</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <item row="3" column="2">
+              <widget class="QLineEdit" name="output_filename">
+               <property name="placeholderText">
+                <string>Enter filename</string>
                </property>
               </widget>
              </item>
@@ -302,6 +296,51 @@
                </item>
               </layout>
              </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="genome_label">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Genome [-x]</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QComboBox" name="genome_box">
+               <property name="toolTip">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="threads_label">
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Threads [-p]</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="pairwise_label">
                <property name="minimumSize">
@@ -324,38 +363,16 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
-              <widget class="QLineEdit" name="output_filename"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="output_label">
+             <item row="4" column="2">
+              <widget class="QPushButton" name="open_output">
                <property name="maximumSize">
                 <size>
-                 <width>150</width>
+                 <width>16777215</width>
                  <height>20</height>
                 </size>
                </property>
                <property name="text">
-                <string>Output Filename [-S]</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QSpinBox" name="threads_sbox">
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-               <property name="minimum">
-                <number>1</number>
-               </property>
-               <property name="maximum">
-                <number>64</number>
-               </property>
-               <property name="value">
-                <number>2</number>
+                <string>Open Output Directory</string>
                </property>
               </widget>
              </item>
@@ -1400,8 +1417,16 @@
     <property name="title">
      <string>Load</string>
     </property>
+    <addaction name="actionDefault_Parameters"/>
     <addaction name="actionParameters"/>
    </widget>
+   <widget class="QMenu" name="menuPreferences">
+    <property name="title">
+     <string>Dummy</string>
+    </property>
+    <addaction name="actionSet_Default_Paths"/>
+   </widget>
+   <addaction name="menuPreferences"/>
    <addaction name="menuLoad"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -1693,7 +1718,17 @@
   </action>
   <action name="actionParameters">
    <property name="text">
-    <string>Parameters...</string>
+    <string>Parameters From File...</string>
+   </property>
+  </action>
+  <action name="actionDefault_Parameters">
+   <property name="text">
+    <string>Default Parameters</string>
+   </property>
+  </action>
+  <action name="actionSet_Default_Paths">
+   <property name="text">
+    <string>Preferences...</string>
    </property>
   </action>
  </widget>

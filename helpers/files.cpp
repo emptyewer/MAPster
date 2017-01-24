@@ -22,8 +22,18 @@ QString Files::get_mapster_dir() {
 }
 
 QString Files::get_mapster_genomes_dir() {
-  QString mapster_dir = get_mapster_dir();
-  return QDir(mapster_dir).filePath("Genomes");
+  if (QFileInfo(QDir(get_mapster_configs_dir()).filePath("genome_dir"))
+          .exists()) {
+    QFile fh(QDir(get_mapster_configs_dir()).filePath("genome_dir"));
+    fh.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream in(&fh);
+    QString line = in.readLine();
+    fh.close();
+    return line;
+  } else {
+    QString mapster_dir = get_mapster_dir();
+    return QDir(mapster_dir).filePath("Genomes");
+  }
 }
 
 QString Files::get_mapster_queues_dir() {
@@ -37,8 +47,18 @@ QString Files::get_mapster_configs_dir() {
 }
 
 QString Files::get_mapster_output_dir() {
-  QString mapster_dir = get_mapster_dir();
-  return QDir(mapster_dir).filePath("Output");
+  if (QFileInfo(QDir(get_mapster_configs_dir()).filePath("output_dir"))
+          .exists()) {
+    QFile fh(QDir(get_mapster_configs_dir()).filePath("output_dir"));
+    fh.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream in(&fh);
+    QString line = in.readLine();
+    fh.close();
+    return line;
+  } else {
+    QString mapster_dir = get_mapster_dir();
+    return QDir(mapster_dir).filePath("Output");
+  }
 }
 
 QString Files::get_genome_url(Genome g) { return g.url.toString(); }

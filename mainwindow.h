@@ -7,6 +7,7 @@
 #include "helpers/runqueue.h"
 #include "ui_about.h"
 #include "ui_mainwindow.h"
+#include "ui_preferences.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -19,6 +20,8 @@ class MainWindow : public QMainWindow {
 public:
   explicit MainWindow(QWidget *parent = 0);
   Ui::MainWindow *ui;
+  Ui::PreferencePane *preferences_ui;
+  QDialog *prefs;
   QVector<Genome> genomes_list;
   int genome_index;
   ~MainWindow();
@@ -44,30 +47,24 @@ private slots:
   void on_unbz2_stateChanged(int arg1);
   void on_algz_stateChanged(int arg1);
   void on_albz2_stateChanged(int arg1);
-
   void on_fastq_reads_clicked();
-
   void on_fasta_reads_clicked();
-
   void on_custom_reads_clicked();
-
   void on_un_stateChanged(int arg1);
-
   void on_al_stateChanged(int arg1);
-
   void on_softclipping_stateChanged(int arg1);
-
   void on_jobs_table_clicked(const QModelIndex &index);
-
   void on_genome_clicked();
-
   void on_rnaseq_clicked();
-
   void on_shrna_clicked();
-
   void on_actionContents_triggered();
-
   void on_actionParameters_triggered();
+  void on_actionDefault_Parameters_triggered();
+  void on_actionSet_Default_Paths_triggered();
+  void ref_button_clicked();
+  void output_button_clicked();
+
+  void on_open_output_clicked();
 
 private:
   void Run();

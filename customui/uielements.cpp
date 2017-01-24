@@ -344,6 +344,8 @@ Parameters UIElements::get_parameters(MainWindow *parent) {
 }
 
 void UIElements::set_parameters(MainWindow *parent, QStringList p) {
+  // Reset values to default first
+  setDefaults(parent);
   // Set thread count
   if (p.contains("-p")) {
     parent->ui->threads_sbox->setValue(p.at(p.indexOf("-p") + 1).toInt());
@@ -592,7 +594,8 @@ void UIElements::add_extension_to_output(MainWindow *parent, Files *f) {
 }
 
 void UIElements::setDefaults(MainWindow *parent) {
-  parent->ui->fasta_reads->setChecked(true);
+  parent->ui->threads_sbox->setValue(parent->ui->threads_sbox->maximum());
+  parent->ui->fastq_reads->setChecked(true);
   parent->ui->skip_first->setValue(0);
   parent->ui->align_first->setValue(0);
   parent->ui->trim5->setValue(0);
@@ -626,5 +629,7 @@ void UIElements::setDefaults(MainWindow *parent) {
   parent->ui->quiet->setChecked(false);
   parent->ui->metrics->setChecked(false);
   parent->ui->reorder->setChecked(false);
-  parent->ui->chr->setChecked(false);
+  parent->ui->chr->setChecked(true);
+  parent->ui->mm->setChecked(true);
+  parent->ui->softclipping->setChecked(true);
 }
