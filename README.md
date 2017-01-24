@@ -9,6 +9,9 @@ A GUI frontend to map NGS sequencing data using HISAT2.
 * Mapping parameter previews
 * Multi-threading
 
+# Screenshot
+![alt tag](https://raw.githubusercontent.com/emptyewer/MAPster/master/screenshot.png)
+
 # License
 Copyright (c) 2016 Venkatramanan Krishnamani, Robert C. Piper, Mark Stamnes
 
