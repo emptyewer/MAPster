@@ -80,7 +80,7 @@ macx {
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
 
 #QMAKE_POST_LINK += "bash /Users/Venky/Work/Softwares/HISAT2/MAPster/post_compile.sh"
-#QMAKE_POST_LINK += "/Users/piperlab/Softwares/Qt5/5.7/clang_64/bin/macdeployqt MAPster.app -dmg -no-strip "
+#QMAKE_POST_LINK += "/Users/piperlab/Softwares/Qt5/5.7/clang_64/bin/macdeployqt MAPster.app -dmg -no-strip"
 
 macx: LIBS += -L/usr/local/lib/ -lboost_container
 

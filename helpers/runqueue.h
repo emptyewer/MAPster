@@ -15,7 +15,7 @@ public:
   QList<int> get_current_states();
   int get_jobs_count();
   QProcess *run(int index);
-  int update_state(int index, int state);
+  void update_state(int index, int state);
   QVector<Parameters> queue;
   ~RunQueue();
 

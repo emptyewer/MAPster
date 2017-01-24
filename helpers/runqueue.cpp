@@ -220,12 +220,8 @@ QList<int> RunQueue::get_current_states() {
 
 int RunQueue::get_jobs_count() { return queue.count(); }
 
-int RunQueue::update_state(int index, int state) {
-  if (queue[index].state < state) {
-    queue[index].state = state;
-    return 0;
-  }
-  return 1;
+void RunQueue::update_state(int index, int state) {
+  queue[index].state = state;
 }
 
 QProcess *RunQueue::run(int index) {
@@ -239,7 +235,7 @@ QProcess *RunQueue::run(int index) {
       QDir(f.get_mapster_output_dir()).filePath(current_date_time());
   f.make_directory(output_path);
   QString output_filename =
-      QDir(output_path).filePath(p.output_filename + ".times.txt");
+      QDir(output_path).filePath(p.output_filename + ".output.txt");
 
   // Launch the Process in a separate thread
   proc = new QProcess();

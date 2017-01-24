@@ -76,14 +76,16 @@ private:
   void populate_genomes_list();
   void make_directory(QString path);
   void add_to_genome_box(Genome g);
-  void download_genome_if_absent();
+  void download_genome_if_absent(Genome g);
   DownloadManager *mManager;
+  bool downloading;
+  bool running;
   QString d_label;
   Files *f;
   RunQueue *q;
   int total_jobs;
   int current_job;
-  QProcess *current_proc;
+  QProcess *current_proc = nullptr;
   QTimer *timer;
 };
 

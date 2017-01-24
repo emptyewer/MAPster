@@ -17,6 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
   q = new RunQueue();
   populate_genomes_list();
   genome_index = 0;
+  downloading = false;
+  running = false;
+  ui->run_button->setEnabled(false);
 }
 
 MainWindow::~MainWindow() {
@@ -41,10 +44,9 @@ void MainWindow::finished() {
   f->untar_files_mac(genomes_list[genome_index]);
   ui->progress_bar->setVisible(false);
   ui->download_label->setVisible(false);
-  ui->run_button->setEnabled(true);
   ui->tabs->setEnabled(true);
   ui->add_to_queue_button->setEnabled(true);
-  ui->clear_queue_button->setEnabled(true);
+  downloading = false;
 }
 
 void MainWindow::setupSlots() {
@@ -100,7 +102,6 @@ void MainWindow::add_to_genome_box(Genome g) {
 
 void MainWindow::on_genome_box_currentIndexChanged(int index) {
   genome_index = index;
-  download_genome_if_absent();
   if (genomes_list[genome_index].type.compare("genome") == 0) {
     ui->k->setValue(5);
   } else {
@@ -108,28 +109,26 @@ void MainWindow::on_genome_box_currentIndexChanged(int index) {
   }
 }
 
-void MainWindow::download_genome_if_absent() {
-  QString genome_file_path = f->get_genome_filepath(genomes_list[genome_index]);
+void MainWindow::download_genome_if_absent(Genome g) {
+  QString genome_file_path = f->get_genome_filepath(g);
   // If genome file is not extracted then untar
-  if (!QFile(f->get_mapster_genomes_dir() + "/" +
-             genomes_list[genome_index].internal_name + ".1.ht2")
+  if (!QFile(f->get_mapster_genomes_dir() + "/" + g.internal_name + ".1.ht2")
            .exists()) {
+    downloading = true;
     if (QFile(genome_file_path).exists()) {
-      f->untar_files_mac(genomes_list[genome_index]);
+      f->untar_files_mac(g);
     } else {
-      mManager->download(f->get_genome_url(genomes_list[genome_index]),
-                         genome_file_path);
-      d_label = "Downloading " + genomes_list[genome_index].name + " (" +
-                genomes_list[genome_index].species + ", " +
-                genomes_list[genome_index].type + ") ...";
+      mManager->download(f->get_genome_url(g), genome_file_path);
+      d_label =
+          "Downloading " + g.name + " (" + g.species + ", " + g.type + ") ...";
       ui->download_label->setText(d_label);
-      ui->run_button->setEnabled(false);
       ui->tabs->setEnabled(false);
       ui->progress_bar->setVisible(true);
       ui->download_label->setVisible(true);
       ui->add_to_queue_button->setEnabled(false);
-      ui->clear_queue_button->setEnabled(false);
     }
+  } else {
+    downloading = false;
   }
 }
 
@@ -137,6 +136,9 @@ void MainWindow::on_add_to_queue_button_clicked() {
   UIElements().add_extension_to_output(this, f);
   q->add_job(UIElements().get_parameters(this));
   update_jobs_table();
+  if (q->get_jobs_count() > 0 && !running) {
+    ui->run_button->setEnabled(true);
+  }
 }
 
 void MainWindow::update_jobs_table() {
@@ -167,14 +169,27 @@ void MainWindow::update_jobs_table() {
 void MainWindow::run_next_in_queue() {
   total_jobs = q->get_jobs_count();
   update_jobs_table();
-  if (current_proc->processId() == 0) {
-    q->update_state(current_job, 2);
-    current_job += 1;
+
+  if (current_job < total_jobs && !downloading) {
+    download_genome_if_absent(q->queue.at(current_job).genome);
+  }
+
+  if (!downloading) {
     if (current_job < total_jobs) {
-      if (q->update_state(current_job, 1) == 0) {
+      if (q->queue.at(current_job).state == 0) {
+        q->update_state(current_job, 1);
         current_proc = q->run(current_job);
+        running = true;
+      } else if (q->queue.at(current_job).state == 1) {
+        if (current_proc->processId() == 0) {
+          q->update_state(current_job, 2);
+          current_job += 1;
+        }
+      } else if (q->queue.at(current_job).state == 2) {
+        current_job += 1;
       }
     } else {
+      running = false;
       update_jobs_table();
       timer->stop();
       ui->run_button->setEnabled(true);
@@ -184,6 +199,7 @@ void MainWindow::run_next_in_queue() {
 }
 
 void MainWindow::on_clear_queue_button_clicked() {
+  ui->run_button->setEnabled(false);
   ui->jobs_table->setRowCount(0);
   ui->jobs_table->clear();
   q->queue.clear();
@@ -193,10 +209,6 @@ void MainWindow::on_clear_queue_button_clicked() {
 void MainWindow::on_run_button_clicked() {
   total_jobs = q->get_jobs_count();
   current_job = 0;
-  if (q->update_state(current_job, 1) == 0) {
-    update_jobs_table();
-    current_proc = q->run(current_job);
-  }
   timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), this, SLOT(run_next_in_queue()));
   timer->start(1000);
