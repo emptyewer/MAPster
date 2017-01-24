@@ -19,9 +19,9 @@ class MainWindow : public QMainWindow {
 
 public:
   explicit MainWindow(QWidget *parent = 0);
-  Ui::MainWindow *ui;
-  Ui::PreferencePane *preferences_ui;
-  QDialog *prefs;
+  Ui::MainWindow *ui = nullptr;
+  QDialog *prefs = nullptr;
+  Ui::PreferencePane *preferences_ui = nullptr;
   QVector<Genome> genomes_list;
   int genome_index;
   ~MainWindow();
@@ -77,12 +77,10 @@ private:
   void make_directory(QString path);
   void add_to_genome_box(Genome g);
   void download_genome_if_absent();
-  QFileSystemModel *drivesModel;
-  QFileSystemModel *filesModel;
   DownloadManager *mManager;
   QString d_label;
-  Files f;
-  RunQueue q;
+  Files *f;
+  RunQueue *q;
   int total_jobs;
   int current_job;
   QProcess *current_proc;

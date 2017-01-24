@@ -8,6 +8,11 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network xml
 
+VERSION = 0.2.0
+
+QMAKE_TARGET_COMPANY = "University of Iowa"
+QMAKE_TQMAKE_TARGET_COPYRIGHT = "(2017) Venkatramanan Krishnamani"
+
 DEFINES  += QT_NO_SSL
 
 TARGET = MAPster
@@ -60,13 +65,16 @@ macx {
     copydata.commands = $(COPY_DIR) $$PWD/hisat2/mac $$DDIR
     CDIR = $$OUT_PWD/MAPster.app/Contents/MacOS/configs
     copyconfigs.commands = $(COPY_DIR) $$PWD/configs/ $$CDIR
+    IFILE = $$OUT_PWD/MAPster.app/Contents/Info.plist
+    copyinfo.commands = $(COPY_FILE) $$PWD/Info.plist $$IFILE
 
-    first.depends = $(first) copydata copyconfigs
+    first.depends = $(first) copydata copyconfigs copyinfo
     export(first.depends)
     export(copydata.commands)
     export(copyconfigs.commands)
+    export(copyinfo.commands)
 
-    QMAKE_EXTRA_TARGETS += first copydata copyconfigs
+    QMAKE_EXTRA_TARGETS += first copydata copyconfigs copyinfo
 }
 
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10

@@ -3,6 +3,8 @@
 
 RunQueue::RunQueue() {}
 
+RunQueue::~RunQueue() { delete proc; }
+
 // Get current date/time, format is YYYY-MM-DD.HH:mm:ss
 QString RunQueue::current_date_time() {
   QDateTime dateTime = dateTime.currentDateTime();
@@ -232,8 +234,17 @@ QProcess *RunQueue::run(int index) {
   QString hisat_executable = QDir(appdir_hisat).filePath("hisat2");
   Parameters p = queue.at(index);
 
+  Files f = Files();
+  QString output_path =
+      QDir(f.get_mapster_output_dir()).filePath(current_date_time());
+  f.make_directory(output_path);
+  QString output_filename =
+      QDir(output_path).filePath(p.output_filename + ".times.txt");
+
   // Launch the Process in a separate thread
   proc = new QProcess();
+  proc->setProcessChannelMode(QProcess::MergedChannels);
+  proc->setStandardOutputFile(output_filename);
   proc->start(hisat_executable, p.args);
   return proc;
 }

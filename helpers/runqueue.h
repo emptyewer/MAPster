@@ -17,6 +17,7 @@ public:
   QProcess *run(int index);
   int update_state(int index, int state);
   QVector<Parameters> queue;
+  ~RunQueue();
 
 private:
   int current_index = 0;

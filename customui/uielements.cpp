@@ -24,8 +24,9 @@ void UIElements::update_params_table(MainWindow *parent, Parameters list) {
                                     list.args.join(" "));
   parent->ui->parameter_table->clear();
   parent->ui->parameter_table->setRowCount(count);
+  QTableWidgetItem *w;
   // Row 1
-  QTableWidgetItem *w = new QTableWidgetItem;
+  w = new QTableWidgetItem;
   w->setText("Genome");
   parent->ui->parameter_table->setItem(0, 0, w);
   w = new QTableWidgetItem;
