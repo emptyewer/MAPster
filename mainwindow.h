@@ -66,6 +66,8 @@ private slots:
 
   void on_open_output_clicked();
 
+  void on_pushButton_clicked();
+
 private:
   void Run();
   void setupPaths();

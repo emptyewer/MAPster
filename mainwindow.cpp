@@ -405,3 +405,7 @@ void MainWindow::output_button_clicked() {
 void MainWindow::on_open_output_clicked() {
   QProcess::startDetached("open " + f.get_mapster_output_dir());
 }
+
+void MainWindow::on_pushButton_clicked() {
+  on_actionSet_Default_Paths_triggered();
+}
