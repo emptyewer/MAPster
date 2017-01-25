@@ -83,7 +83,7 @@ macx {
     PRE_TARGETDEPS += /usr/local/lib/libxerces-c.a
 
     #QMAKE_POST_LINK += "bash /Users/Venky/Work/Softwares/HISAT2/MAPster/post_compile.sh"
-    #QMAKE_POST_LINK += "/Users/piperlab/Softwares/Qt5/5.7/clang_64/bin/macdeployqt MAPster.app -dmg -no-strip"
+    #QMAKE_POST_LINK += "/Users/piperlab/Softwares/Qt5/5.7/clang_64/bin/macdeployqt MAPster.app -no-strip"
 }
 
 
