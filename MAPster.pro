@@ -8,17 +8,10 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network xml
 
-VERSION = 0.2.0
-
-QMAKE_TARGET_COMPANY = "University of Iowa"
-QMAKE_TQMAKE_TARGET_COPYRIGHT = "(2017) Venkatramanan Krishnamani"
-
 DEFINES  += QT_NO_SSL
 
 TARGET = MAPster
 TEMPLATE = app
-
-ICON = Icon.icns
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -75,31 +68,22 @@ macx {
     export(copyinfo.commands)
 
     QMAKE_EXTRA_TARGETS += first copydata copyconfigs copyinfo
+
+    ICON = Icon.icns
+
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
+
+    INCLUDEPATH += /usr/local/include
+    DEPENDPATH += /usr/local/include
+
+    LIBS += -L/usr/local/lib/ -larchive
+    PRE_TARGETDEPS += /usr/local/lib/libarchive.a
+
+    LIBS += -L/usr/local/lib/ -lxerces-c
+    PRE_TARGETDEPS += /usr/local/lib/libxerces-c.a
+
+    #QMAKE_POST_LINK += "bash /Users/Venky/Work/Softwares/HISAT2/MAPster/post_compile.sh"
+    #QMAKE_POST_LINK += "/Users/piperlab/Softwares/Qt5/5.7/clang_64/bin/macdeployqt MAPster.app -dmg -no-strip"
 }
 
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
 
-#QMAKE_POST_LINK += "bash /Users/Venky/Work/Softwares/HISAT2/MAPster/post_compile.sh"
-#QMAKE_POST_LINK += "/Users/piperlab/Softwares/Qt5/5.7/clang_64/bin/macdeployqt MAPster.app -dmg -no-strip"
-
-macx: LIBS += -L/usr/local/lib/ -lboost_container
-
-INCLUDEPATH += /usr/local/include
-DEPENDPATH += /usr/local/include
-
-macx: PRE_TARGETDEPS += /usr/local/lib/libboost_container.a
-
-
-macx: LIBS += -L/usr/local/lib/ -larchive
-
-INCLUDEPATH += /usr/local/include
-DEPENDPATH += /usr/local/include
-
-macx: PRE_TARGETDEPS += /usr/local/lib/libarchive.a
-
-macx: LIBS += -L/usr/local/lib/ -lxerces-c
-
-INCLUDEPATH += /usr/local/include
-DEPENDPATH += /usr/local/include
-
-macx: PRE_TARGETDEPS += /usr/local/lib/libxerces-c.a

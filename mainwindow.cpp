@@ -91,7 +91,7 @@ void MainWindow::make_directory(QString path) {
 
 void MainWindow::populate_genomes_list() {
   genomes_list = f->get_genomes_list();
-  BOOST_FOREACH (Genome g, genomes_list) { add_to_genome_box(g); }
+  foreach (Genome g, genomes_list) { add_to_genome_box(g); }
 }
 
 void MainWindow::add_to_genome_box(Genome g) {

@@ -363,7 +363,7 @@ void UIElements::set_parameters(MainWindow *parent, QStringList p) {
   if (p.contains("-x")) {
     QFileInfo fi(p.at(p.indexOf("-x") + 1));
     int i = 0;
-    BOOST_FOREACH (Genome g, parent->genomes_list) {
+    foreach (Genome g, parent->genomes_list) {
       if (fi.filePath().contains(g.internal_name)) {
         parent->ui->genome_box->setCurrentIndex(i);
         break;
