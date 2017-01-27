@@ -9,6 +9,9 @@ A GUI frontend to map NGS sequencing data using HISAT2.
 * Mapping parameter previews
 * Multi-threading
 
+# 3rd party packages
+This software includes HISAT2 executable. http://ccb.jhu.edu/software/hisat2/index.shtml
+
 # Screenshot
 ![alt tag](https://raw.githubusercontent.com/emptyewer/MAPster/master/screenshot.png)
 
@@ -32,3 +35,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+# Citation
+Kim D, Langmead B and Salzberg SL. HISAT: a fast spliced aligner with low memory requirements. Nature Methods 2015
