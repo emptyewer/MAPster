@@ -7,7 +7,7 @@ A GUI frontend to map NGS sequencing data using HISAT2.
 * Loading mapping parameters from previous mapping runs
 * Autodownload indexed reference libraries
 * Mapping parameter previews
-* Multi-threading
+* Multi-threading (a HISAT2 feature)
 
 # 3rd party packages
 This software includes HISAT2 executable. http://ccb.jhu.edu/software/hisat2/index.shtml
