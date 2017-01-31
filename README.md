@@ -15,6 +15,9 @@ This software includes HISAT2 executable. http://ccb.jhu.edu/software/hisat2/ind
 # Screenshot
 ![alt tag](https://raw.githubusercontent.com/emptyewer/MAPster/master/screenshot.png)
 
+# Video
+https://youtu.be/oKzu1-pWKbY
+
 # License
 Copyright (c) 2016 Venkatramanan Krishnamani, Robert C. Piper, Mark Stamnes
 
