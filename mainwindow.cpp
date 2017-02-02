@@ -25,7 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() {
-  q->quit_current_job();
   delete f;
   delete preferences_ui;
   delete prefs;
