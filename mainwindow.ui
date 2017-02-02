@@ -439,25 +439,20 @@
           </property>
           <item>
            <widget class="QPushButton" name="open_output">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
             <property name="text">
              <string>Open Output Directory</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <widget class="QPushButton" name="reference_dir">
+            <property name="text">
+             <string>Open Reference Directory</string>
             </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="preferences">
             <property name="text">
              <string>Set Default Directories</string>
             </property>

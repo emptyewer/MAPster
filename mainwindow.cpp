@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() {
+  q->quit_current_job();
   delete f;
   delete preferences_ui;
   delete prefs;
@@ -437,8 +438,13 @@ void MainWindow::on_open_output_clicked() {
   QProcess::startDetached("open " + f->get_mapster_output_dir());
 }
 
-void MainWindow::on_pushButton_clicked() {
+void MainWindow::on_preferences_clicked() {
   on_actionSet_Default_Paths_triggered();
 }
 
 void MainWindow::on_quit_current_job_button_clicked() { q->quit_current_job(); }
+
+void MainWindow::on_reference_dir_clicked()
+{
+  QProcess::startDetached("open " + f->get_mapster_genomes_dir());
+}

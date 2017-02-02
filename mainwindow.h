@@ -64,8 +64,9 @@ private slots:
   void ref_button_clicked();
   void output_button_clicked();
   void on_open_output_clicked();
-  void on_pushButton_clicked();
+  void on_preferences_clicked();
   void on_quit_current_job_button_clicked();
+  void on_reference_dir_clicked();
 
 private:
   void set_custom_style();
