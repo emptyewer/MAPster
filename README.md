@@ -1,4 +1,6 @@
 # MAPster
+[![Code Climate](https://codeclimate.com/repos/589033c7604ae30054000d22/badges/e6a1899ff34e09cf3a23/gpa.svg)](https://codeclimate.com/repos/589033c7604ae30054000d22/feed)
+[![Issue Count](https://codeclimate.com/repos/589033c7604ae30054000d22/badges/e6a1899ff34e09cf3a23/issue_count.svg)](https://codeclimate.com/repos/589033c7604ae30054000d22/feed)
 A GUI frontend to map NGS sequencing data using HISAT2. 
 
 # Features
