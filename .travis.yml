@@ -22,20 +22,21 @@ before_script:
 - $QMAKE -r -Wall -Wlogic -Wparser CONFIG+=release "$TRAVIS_BUILD_DIR"
 - popd
 script:
-- DEPLOY=`find /usr/local -name "macdeployqt" | head -n 1`
 - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
 - pushd "$TRAVIS_BUILD_DIR-build"
-- pwd
-- ls -la
 - $DEPLOY MAPster.app -no-strip -verbose=3
 - popd
-- pwd
-- ls -la
 - cp -f -R "$TRAVIS_BUILD_DIR/configs/" "$TRAVIS_BUILD_DIR-build/MAPster.app/Contents/MacOS/configs"
 - cp -f -R "$TRAVIS_BUILD_DIR/Info.plist" "$TRAVIS_BUILD_DIR-build/MAPster.app/Contents/Info.plist"
 - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
 - pushd "$TRAVIS_BUILD_DIR-build"
-- pwd
-- ls -la
 - $DEPLOY MAPster.app -no-strip -dmg -verbose=3
-- du -s -h MAPster.app.dmg
+- du -s -h MAPster.dmg
+- mv MAPster.dmg MAPster_macOS_beta2.4.dmg
+deploy:
+  provider: releases
+  api_key:
+    secure: jbWFlPrLr8nrfw5ywBIeav9RKRVP0enZ/vH5Bqo5oCUahbbCLXR9qfhnv2GDgxMG84FegV22ub6Tja7rhNWMJCtQZDqbikD7Z+eGreaO5EaUBFFV51hBXGxoVl+ZmcU8TWswQB2Goj/sxirnl951rkPP5OensEaOw1JyxeNIIqLugs4z6sohHksN4x144/FodZ0Jr/f8M5r2C3hEu+ergQgIpqPzs1GkaPB0wHBw3MJe5xqvuD7/ehyTETQaMiCB7SCDb8/yjH6zvcPiaviL7JJbsfju2DlkwbKSPH9+wse/TzwbeozYUehNEDbbOWUrHriR6ugdCLV/7mNWyobiWtD7WxUrC0zLlIYMFVkVftkDWc3+RNeFV4WbSjyBDL+V+N50VWf/YkLU0SBer4JPJiq8ixbvhCWcvuC5SZrSfs4+NhpREgxXtwafyTvJoITvJPElCkV02mFsz9153N2NRuB+Q1vS2d7pxxL4WMK7Q+GArwnL0owVHujccv1l26EZyqHb3pzVeYJ4FSN35CdcNeRVrKFiOqx3ORTwuzCnyI0Sj+ygdoaYxllMvhfP6s896l1uwgcQIDNVU4/1pOsRpbEcUdPCJBZZzSHzL40O0zLTzY/Wii36yCqvm0WA9sm2EGDmgbwG5qfnmcgoOnlLj68Pbd3cuR+Xyhe1X1khOFk=
+  file: MAPster_macOS_beta2.4.dmg
+  on:
+    repo: emptyewer/MAPster
