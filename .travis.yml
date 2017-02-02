@@ -6,7 +6,7 @@ compiler:
 before_install:
  - brew update
 install:
- - brew install homebrew/versions/qt5
+ - brew install qt5
  - brew install libarchive
  - brew link libarchive
  - brew install xerces-c
@@ -22,10 +22,17 @@ before_script:
  - $QMAKE -r -Wall -Wlogic -Wparser CONFIG+=release "$TRAVIS_BUILD_DIR"
  - popd
 script:
+ - DEPLOY=`find /usr/local -name "macdeployqt" | head -n 1`
  - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
  - pushd "$TRAVIS_BUILD_DIR-build"
  - pwd
  - ls -la
- - DEPLOY=`find /usr/local -name "macdeployqt" | head -n 1`
- - "$DEPLOY MAPster.app -no-strip -dmg -verbose=3"
+ - "$DEPLOY MAAPster.app -no-strip -verbose=3"
+ - popd
+ - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
+ - pushd "$TRAVIS_BUILD_DIR-build"
+ - pwd
+ - ls -la
+ - "$DEPLOY MAAPster.app -no-strip -dmg -verbose=3"
  - du -s -h MAPster_macOS_beta2.4.dmg
+
