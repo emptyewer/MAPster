@@ -99,11 +99,17 @@
           </item>
           <item>
            <widget class="VListWidget" name="selected_files_list1">
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
             <property name="isWrapping" stdset="0">
              <bool>true</bool>
             </property>
             <property name="spacing">
-             <number>4</number>
+             <number>2</number>
             </property>
             <property name="uniformItemSizes">
              <bool>true</bool>
@@ -128,11 +134,17 @@
           </item>
           <item>
            <widget class="VListWidget" name="selected_files_list2">
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
             <property name="isWrapping" stdset="0">
              <bool>true</bool>
             </property>
             <property name="spacing">
-             <number>4</number>
+             <number>2</number>
             </property>
             <property name="uniformItemSizes">
              <bool>true</bool>
@@ -184,16 +196,13 @@
              </property>
              <item row="0" column="2">
               <layout class="QHBoxLayout" name="pairwise_layout">
+               <property name="sizeConstraint">
+                <enum>QLayout::SetFixedSize</enum>
+               </property>
                <item>
                 <widget class="QGroupBox" name="pairwise_group">
                  <property name="enabled">
                   <bool>true</bool>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>26</height>
-                  </size>
                  </property>
                  <property name="title">
                   <string/>
@@ -205,11 +214,11 @@
                   <bool>false</bool>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_3">
-                  <property name="spacing">
-                   <number>-1</number>
+                  <property name="sizeConstraint">
+                   <enum>QLayout::SetFixedSize</enum>
                   </property>
                   <property name="leftMargin">
-                   <number>12</number>
+                   <number>0</number>
                   </property>
                   <property name="topMargin">
                    <number>0</number>
@@ -222,10 +231,10 @@
                   </property>
                   <item>
                    <widget class="QRadioButton" name="pairwise_on">
-                    <property name="maximumSize">
+                    <property name="minimumSize">
                      <size>
-                      <width>16777215</width>
-                      <height>20</height>
+                      <width>100</width>
+                      <height>0</height>
                      </size>
                     </property>
                     <property name="text">
@@ -237,11 +246,24 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="pairwise_off">
-                    <property name="maximumSize">
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
                      <size>
-                      <width>16777215</width>
+                      <width>40</width>
                       <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="pairwise_off">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>0</height>
                      </size>
                     </property>
                     <property name="text">
@@ -343,7 +365,7 @@
              <item row="2" column="2">
               <widget class="QSpinBox" name="threads_sbox">
                <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                <set>Qt::AlignCenter</set>
                </property>
                <property name="minimum">
                 <number>1</number>
@@ -423,12 +445,6 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
             <property name="text">
              <string>Open Output Directory</string>
             </property>
@@ -441,12 +457,6 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
             </property>
             <property name="text">
              <string>Set Default Directories</string>
@@ -481,7 +491,7 @@
        <attribute name="title">
         <string>Input</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
          <widget class="QGroupBox" name="reads_format">
           <property name="title">
@@ -536,41 +546,41 @@
           <property name="title">
            <string>Encoding</string>
           </property>
-          <property name="flat">
-           <bool>false</bool>
-          </property>
-          <widget class="QRadioButton" name="phread33">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>30</y>
-             <width>501</width>
-             <height>20</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Input qualities are ASCII chars equal to the Phred quality plus 33 [--phred33]</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-          <widget class="QRadioButton" name="phread64">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>60</y>
-             <width>501</width>
-             <height>20</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Input qualities are ASCII chars equal to the Phred quality plus 64 [--phred64]</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QRadioButton" name="phread33">
+             <property name="text">
+              <string>Input qualities are ASCII chars equal to the Phred quality plus 33 [--phred33]</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>0</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="phread64">
+             <property name="text">
+              <string>Input qualities are ASCII chars equal to the Phred quality plus 64 [--phred64]</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item>
@@ -603,6 +613,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="skip_first">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="maximum">
              <number>999999999</number>
             </property>
@@ -650,6 +663,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="align_first">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="maximum">
              <number>999999999</number>
             </property>
@@ -702,6 +718,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="trim5">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="maximum">
              <number>999999999</number>
             </property>
@@ -759,6 +778,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="trim3">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="maximum">
              <number>999999999</number>
             </property>
@@ -873,9 +895,6 @@
           <property name="text">
            <string>Memory Mapped I/O to load the index file.  [--mm]</string>
           </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
          </widget>
         </item>
        </layout>
@@ -902,6 +921,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="mp_mx">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>6</number>
             </property>
@@ -919,6 +941,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="mp_mn">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>2</number>
             </property>
@@ -964,6 +989,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="sp_mx">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>2</number>
             </property>
@@ -981,6 +1009,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="sp_mn">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>1</number>
             </property>
@@ -1013,6 +1044,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="rdg1">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>5</number>
             </property>
@@ -1027,6 +1061,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="rdg2">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>3</number>
             </property>
@@ -1059,6 +1096,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="rfg1">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>5</number>
             </property>
@@ -1073,6 +1113,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="rfg2">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>3</number>
             </property>
@@ -1116,6 +1159,9 @@
           </item>
           <item>
            <widget class="QSpinBox" name="np">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="minimum">
              <number>1</number>
             </property>
@@ -1142,12 +1188,6 @@
        <layout class="QVBoxLayout" name="verticalLayout_11">
         <item>
          <widget class="QGroupBox" name="groupBox_2">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>100</height>
-           </size>
-          </property>
           <property name="title">
            <string/>
           </property>
@@ -1184,12 +1224,6 @@
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox_3">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>100</height>
-           </size>
-          </property>
           <property name="title">
            <string/>
           </property>
@@ -1254,6 +1288,9 @@
               <height>30</height>
              </size>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="value">
              <number>5</number>
             </property>
@@ -1303,6 +1340,9 @@
               <width>16777215</width>
               <height>30</height>
              </size>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
             <property name="value">
              <number>5</number>
@@ -1470,7 +1510,7 @@
    <property name="minimumSize">
     <size>
      <width>400</width>
-     <height>346</height>
+     <height>377</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -1494,16 +1534,68 @@
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QLabel" name="label_12">
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Jobs</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_17">
+       <item>
+        <widget class="QLabel" name="label_12">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Jobs</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="clear_queue_button">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Clear Selected</string>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="quit_current_job_button">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Quit Current Job</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QTableWidget" name="jobs_table">
@@ -1658,42 +1750,13 @@
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>Add to Q</string>
-         </property>
-         <property name="flat">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="clear_queue_button">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Clear Q</string>
+          <string>Add to Queue</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -1716,13 +1779,13 @@
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>Run</string>
+          <string>Run Queue</string>
          </property>
         </widget>
        </item>

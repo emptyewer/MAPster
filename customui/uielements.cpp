@@ -1,4 +1,5 @@
 #include "uielements.h"
+#include "helpers/files.h"
 #include <QThread>
 
 UIElements::UIElements() {}
@@ -19,8 +20,9 @@ QString UIElements::get_read_file_list(VListWidget *list) {
 }
 
 void UIElements::update_params_table(MainWindow *parent, Parameters list) {
+  Files f = Files();
   int count = 27;
-  parent->ui->command_line->setText("<hisat2 executable> " +
+  parent->ui->command_line->setText(f.get_hisat_executable_path() +
                                     list.args.join(" "));
   parent->ui->parameter_table->clear();
   parent->ui->parameter_table->setRowCount(count);
@@ -631,6 +633,6 @@ void UIElements::setDefaults(MainWindow *parent) {
   parent->ui->metrics->setChecked(false);
   parent->ui->reorder->setChecked(false);
   parent->ui->chr->setChecked(true);
-  parent->ui->mm->setChecked(true);
+  parent->ui->mm->setChecked(false);
   parent->ui->softclipping->setChecked(true);
 }

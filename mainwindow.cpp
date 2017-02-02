@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
       preferences_ui(new Ui::PreferencePane) {
   ui->setupUi(this);
+  set_custom_style();
   prefs = new QDialog(this);
   preferences_ui->setupUi(prefs);
   //  setupViews();
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
   downloading = false;
   running = false;
   ui->run_button->setEnabled(false);
+  ui->quit_current_job_button->setEnabled(false);
 }
 
 MainWindow::~MainWindow() {
@@ -28,6 +30,17 @@ MainWindow::~MainWindow() {
   delete prefs;
   delete mManager;
   delete ui;
+}
+
+void MainWindow::set_custom_style() {
+  QFile f(":qdarkstyle/style.qss");
+  if (!f.exists()) {
+    printf("Unable to set stylesheet, file not found\n");
+  } else {
+    f.open(QFile::ReadOnly | QFile::Text);
+    QTextStream ts(&f);
+    qApp->setStyleSheet(ts.readAll());
+  }
 }
 
 void MainWindow::addLine(QString qsLine) { qDebug() << qsLine; }
@@ -192,6 +205,7 @@ void MainWindow::run_next_in_queue() {
       running = false;
       update_jobs_table();
       timer->stop();
+      ui->quit_current_job_button->setEnabled(false);
       ui->run_button->setEnabled(true);
       ui->clear_queue_button->setEnabled(true);
     }
@@ -199,10 +213,9 @@ void MainWindow::run_next_in_queue() {
 }
 
 void MainWindow::on_clear_queue_button_clicked() {
-  ui->run_button->setEnabled(false);
-  ui->jobs_table->setRowCount(0);
-  ui->jobs_table->clear();
-  q->queue.clear();
+  int row = ui->jobs_table->row(ui->jobs_table->selectedItems().at(0));
+  q->remove_job(row);
+  ui->jobs_table->removeRow(row);
   q->set_current_index(0);
 }
 
@@ -214,6 +227,7 @@ void MainWindow::on_run_button_clicked() {
   timer->start(1000);
   ui->run_button->setEnabled(false);
   ui->clear_queue_button->setEnabled(false);
+  ui->quit_current_job_button->setEnabled(true);
 }
 
 /* Proper checks to reset GUI parameters that are interlinked with each other
@@ -378,8 +392,10 @@ void MainWindow::on_actionDefault_Parameters_triggered() {
 }
 
 void MainWindow::on_actionSet_Default_Paths_triggered() {
-  preferences_ui->ref_path->setText(f->get_mapster_genomes_dir());
-  preferences_ui->output_path->setText(f->get_mapster_output_dir());
+  preferences_ui->ref_path->setText(
+      f->get_mapster_genomes_dir().replace("\\ ", " "));
+  preferences_ui->output_path->setText(
+      f->get_mapster_output_dir().replace("\\ ", " "));
   prefs->exec();
 }
 
@@ -424,3 +440,5 @@ void MainWindow::on_open_output_clicked() {
 void MainWindow::on_pushButton_clicked() {
   on_actionSet_Default_Paths_triggered();
 }
+
+void MainWindow::on_quit_current_job_button_clicked() { q->quit_current_job(); }

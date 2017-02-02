@@ -63,12 +63,12 @@ private slots:
   void on_actionSet_Default_Paths_triggered();
   void ref_button_clicked();
   void output_button_clicked();
-
   void on_open_output_clicked();
-
   void on_pushButton_clicked();
+  void on_quit_current_job_button_clicked();
 
 private:
+  void set_custom_style();
   void Run();
   void setupPaths();
   void setupViews();

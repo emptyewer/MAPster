@@ -1,4 +1,4 @@
-#include "files.h"
+#include "helpers/files.h"
 
 Files::Files() {
   documents_dir =
@@ -19,6 +19,19 @@ QString Files::get_genome_filename(Genome g) {
 
 QString Files::get_mapster_dir() {
   return QDir(documents_dir).filePath("MAPsterFiles");
+}
+
+// Get current date/time, format is YYYY-MM-DD.HH:mm:ss
+QString Files::current_date_time() {
+  QDateTime dateTime = dateTime.currentDateTime();
+  return dateTime.toString("yyyy-MM-dd");
+}
+
+QString Files::get_output_dir() {
+  QString output_path =
+      QDir(get_mapster_output_dir()).filePath(current_date_time());
+  make_directory(output_path);
+  return output_path;
 }
 
 QString Files::get_mapster_genomes_dir() {
@@ -63,6 +76,12 @@ QString Files::get_mapster_output_dir() {
 
 QString Files::get_genome_url(Genome g) { return g.url.toString(); }
 
+QString Files::get_hisat_executable_path() {
+  QString appdir = QCoreApplication::applicationDirPath();
+  QString appdir_hisat = QDir(appdir).filePath("hisat2");
+  return QDir(appdir_hisat).filePath("hisat2");
+}
+
 void Files::make_directory(QString path) {
   if (!QDir(path).exists()) {
     QDir().mkpath(path);
@@ -78,11 +97,12 @@ void Files::create_documents_folder() {
 }
 
 void Files::untar_files_mac(Genome g) {
-  QString command = "tar xvfz \"" + get_genome_filepath(g) + "\" -C \"" +
-                    get_mapster_genomes_dir() + "\"";
+  QString command = "tar xvfz \"" + get_genome_filepath(g).replace(" ", "\\ ") +
+                    "\" -C \"" + get_mapster_genomes_dir() + "\"";
   string command_str = command.toStdString();
   system(command_str.c_str());
-  QString remove = "rm -f \"" + get_genome_filepath(g) + "\"";
+  QString remove =
+      "rm -f \"" + get_genome_filepath(g).replace(" ", "\\ ") + "\"";
   string remove_str = remove.toStdString();
   system(remove_str.c_str());
 }

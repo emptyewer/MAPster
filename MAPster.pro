@@ -50,7 +50,8 @@ DISTFILES += \
 
 RESOURCES += \
     images.qrc \
-    icon.qrc
+    icon.qrc \
+    qdarkstyle/style.qrc
 
 # Mac Specific Code
 macx {

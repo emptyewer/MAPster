@@ -6,9 +6,9 @@
 #include <archive.h>
 #include <archive_entry.h>
 
-#include "mystructs.h"
+#include "helpers/includes.h"
+#include "helpers/mystructs.h"
 #include "xml/XMLDomDocument.h"
-#include <helpers/includes.h>
 
 class Files {
 public:
@@ -22,6 +22,8 @@ public:
   QString get_mapster_queues_dir();
   QString get_mapster_configs_dir();
   QString get_mapster_output_dir();
+  QString get_hisat_executable_path();
+  QString get_output_dir();
   QVector<Genome> get_genomes_list();
   void create_documents_folder();
   void untar_files_mac(Genome g);
@@ -31,6 +33,7 @@ public:
 private:
   QString documents_dir;
   int copy_data(struct archive *ar, struct archive *aw);
+  QString current_date_time();
 };
 
 #endif // FILES_H
