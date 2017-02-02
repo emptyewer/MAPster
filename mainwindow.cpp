@@ -228,8 +228,11 @@ void MainWindow::on_clear_queue_button_clicked() {
   q->set_current_index(0);
   if (q->get_jobs_count() == 0) {
        ui->clear_queue_button->setEnabled(false);
+       ui->parameter_table->clear();
+       ui->command_line->clear();
   }
   else if (ui->jobs_table->selectedItems().length() > 0) {
+      UIElements().update_params_table(this, q->get_parameters(ui->jobs_table->row(ui->jobs_table->selectedItems().at(0))));
       ui->clear_queue_button->setEnabled(true);
   }
 }
