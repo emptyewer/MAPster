@@ -26,10 +26,13 @@
    <string>Directory Preferences</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="topMargin">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string/>
+      <string>Defaults</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -37,7 +40,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Default Output Path</string>
+           <string>Mapped Output Path</string>
           </property>
          </widget>
         </item>
@@ -50,7 +53,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Default Reference Path</string>
+           <string>Reference Index Path</string>
           </property>
          </widget>
         </item>

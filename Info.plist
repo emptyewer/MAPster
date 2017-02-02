@@ -17,14 +17,14 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2017 Venkatramanan Krishnamani, Robert C. Piper, Mark Stammnes.</string>
 	<key>CFBundleDisplayName</key>
-	<string>MAPster β2.3</string>
+	<string>MAPster β2.4</string>
 	<key>CFBundleName</key>
-	<string>MAPster β2.3</string>
+	<string>MAPster β2.4</string>
 	<key>CFBundleVersion</key>
-	<string>β2.3</string>
+	<string>β2.4</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.education</string>
 	<key>CFBundleShortVersionString</key>
-	<string>β2.3</string>
+	<string>β2.4</string>
 </dict>
 </plist>

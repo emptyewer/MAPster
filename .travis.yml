@@ -1,0 +1,28 @@
+language: cpp
+os:
+- osx
+compiler:
+- clang
+before_install:
+- brew update
+install:
+- brew install qt5
+- brew install libarchive
+- brew link libarchive --force
+- brew install xerces-c
+- brew link xerces-c --force
+before_script:
+- export QMAKESPEC=macx-clang
+- mkdir -p "$TRAVIS_BUILD_DIR-build"
+- pushd "$TRAVIS_BUILD_DIR-build"
+- QMAKE=`find /usr/local -name "qmake" | head -n 1`
+- DEPLOY=`find /usr/local -name "macdeployqt" | head -n 1`
+- $QMAKE -v
+- echo "compile release version only"
+- $QMAKE -r -Wall -Wlogic -Wparser CONFIG+=release "$TRAVIS_BUILD_DIR"
+- popd
+script:
+- make -C "$TRAVIS_BUILD_DIR-build" -j2 all
+- pushd "$TRAVIS_BUILD_DIR-build"
+- cp -f -R "$TRAVIS_BUILD_DIR/configs/" "$TRAVIS_BUILD_DIR-build/MAPster.app/Contents/MacOS/configs"
+- cp -f -R "$TRAVIS_BUILD_DIR/Info.plist" "$TRAVIS_BUILD_DIR-build/MAPster.app/Contents/Info.plist"

@@ -15,7 +15,7 @@ void RunQueue::add_job(Parameters p) {
     queue.append(construct_command_line(p));
   } else {
     VError e = VError(error_string);
-    e.show();
+//    e.show();
   }
 }
 

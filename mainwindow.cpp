@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
   running = false;
   ui->run_button->setEnabled(false);
   ui->quit_current_job_button->setEnabled(false);
+  ui->clear_queue_button->setEnabled(false);
 }
 
 MainWindow::~MainWindow() {
@@ -149,8 +150,16 @@ void MainWindow::on_add_to_queue_button_clicked() {
   UIElements().add_extension_to_output(this, f);
   q->add_job(UIElements().get_parameters(this));
   update_jobs_table();
-  if (q->get_jobs_count() > 0 && !running) {
-    ui->run_button->setEnabled(true);
+  if (q->get_jobs_count() > 0) {
+    if (!running) {
+        ui->run_button->setEnabled(true);
+    }
+    if (ui->jobs_table->selectedItems().length() > 0) {
+        ui->clear_queue_button->setEnabled(true);
+    }
+    else {
+        ui->clear_queue_button->setEnabled(false);
+    }
   }
 }
 
@@ -217,6 +226,15 @@ void MainWindow::on_clear_queue_button_clicked() {
   q->remove_job(row);
   ui->jobs_table->removeRow(row);
   q->set_current_index(0);
+  if (q->get_jobs_count() == 0) {
+       ui->clear_queue_button->setEnabled(false);
+       ui->parameter_table->clear();
+       ui->command_line->clear();
+  }
+  else if (ui->jobs_table->selectedItems().length() > 0) {
+      UIElements().update_params_table(this, q->get_parameters(ui->jobs_table->row(ui->jobs_table->selectedItems().at(0))));
+      ui->clear_queue_button->setEnabled(true);
+  }
 }
 
 void MainWindow::on_run_button_clicked() {
@@ -338,6 +356,9 @@ void MainWindow::on_softclipping_stateChanged(int arg1) {
 
 void MainWindow::on_jobs_table_clicked(const QModelIndex &index) {
   UIElements().update_params_table(this, q->get_parameters(index.row()));
+  if (ui->jobs_table->selectedItems().length() > 0) {
+        ui->clear_queue_button->setEnabled(true);
+  }
 }
 
 void MainWindow::on_genome_clicked() { UIElements().setDefaults(this); }
@@ -437,8 +458,13 @@ void MainWindow::on_open_output_clicked() {
   QProcess::startDetached("open " + f->get_mapster_output_dir());
 }
 
-void MainWindow::on_pushButton_clicked() {
+void MainWindow::on_preferences_clicked() {
   on_actionSet_Default_Paths_triggered();
 }
 
 void MainWindow::on_quit_current_job_button_clicked() { q->quit_current_job(); }
+
+void MainWindow::on_reference_dir_clicked()
+{
+  QProcess::startDetached("open " + f->get_mapster_genomes_dir());
+}
