@@ -4,6 +4,7 @@ A GUI frontend to map NGS sequencing data using HISAT2.
 
 [![Code Climate](https://codeclimate.com/repos/589033c7604ae30054000d22/badges/e6a1899ff34e09cf3a23/gpa.svg)](https://codeclimate.com/repos/589033c7604ae30054000d22/feed)
 [![Issue Count](https://codeclimate.com/repos/589033c7604ae30054000d22/badges/e6a1899ff34e09cf3a23/issue_count.svg)](https://codeclimate.com/repos/589033c7604ae30054000d22/feed)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/150b6eae633d47969b3f2b5e9d5cb806)](https://www.codacy.com/app/emptyewer/MAPster?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=emptyewer/MAPster&amp;utm_campaign=Badge_Grade)
 
 ##  Features ##
 
