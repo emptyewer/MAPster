@@ -3,6 +3,7 @@
 A GUI frontend to map NGS sequencing data using HISAT2. 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/150b6eae633d47969b3f2b5e9d5cb806)](https://www.codacy.com/app/emptyewer/MAPster?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=emptyewer/MAPster&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/emptyewer/MAPster.svg?branch=master)](https://travis-ci.org/emptyewer/MAPster)
 
 ##  Features ##
 
