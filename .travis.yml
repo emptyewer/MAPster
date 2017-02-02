@@ -1,38 +1,42 @@
 language: cpp
 os:
- - osx
+- osx
 compiler:
- - clang
+- clang
 before_install:
- - brew update
+- brew update
 install:
- - brew install qt5
- - brew install libarchive
- - brew link libarchive
- - brew install xerces-c
- - brew link xerces-c
+- brew install qt5
+- brew install libarchive
+- brew link libarchive
+- brew install xerces-c
+- brew link xerces-c
 before_script:
- - export QMAKESPEC=macx-clang
- - mkdir -p "$TRAVIS_BUILD_DIR-build"
- - pushd "$TRAVIS_BUILD_DIR-build"
- - QMAKE=`find /usr/local -name "qmake" | head -n 1`
- - DEPLOY=`find /usr/local -name "macdeployqt" | head -n 1`
- - "$QMAKE -v"
- - echo "compile release version only"
- - $QMAKE -r -Wall -Wlogic -Wparser CONFIG+=release "$TRAVIS_BUILD_DIR"
- - popd
+- export QMAKESPEC=macx-clang
+- mkdir -p "$TRAVIS_BUILD_DIR-build"
+- pushd "$TRAVIS_BUILD_DIR-build"
+- QMAKE=`find /usr/local -name "qmake" | head -n 1`
+- DEPLOY=`find /usr/local -name "macdeployqt" | head -n 1`
+- $QMAKE -v
+- echo "compile release version only"
+- $QMAKE -r -Wall -Wlogic -Wparser CONFIG+=release "$TRAVIS_BUILD_DIR"
+- popd
 script:
- - DEPLOY=`find /usr/local -name "macdeployqt" | head -n 1`
- - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
- - pushd "$TRAVIS_BUILD_DIR-build"
- - pwd
- - ls -la
- - "$DEPLOY MAAPster.app -no-strip -verbose=3"
- - popd
- - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
- - pushd "$TRAVIS_BUILD_DIR-build"
- - pwd
- - ls -la
- - "$DEPLOY MAAPster.app -no-strip -dmg -verbose=3"
- - du -s -h MAPster_macOS_beta2.4.dmg
-
+- DEPLOY=`find /usr/local -name "macdeployqt" | head -n 1`
+- make -C "$TRAVIS_BUILD_DIR-build" -j2 all
+- pushd "$TRAVIS_BUILD_DIR-build"
+- pwd
+- ls -la
+- $DEPLOY MAAPster.app -no-strip -verbose=3
+- popd
+- make -C "$TRAVIS_BUILD_DIR-build" -j2 all
+- pushd "$TRAVIS_BUILD_DIR-build"
+- pwd
+- ls -la
+- $DEPLOY MAAPster.app -no-strip -dmg -verbose=3
+- du -s -h MAPster_macOS_beta2.4.dmg
+deploy:
+  provider: releases
+  api_key:
+    secure: ZzSVoO3oUDvG4q3FjycnRxXaYQoNMSUIH0tjCLVzD1fvPmEyRS6K6rb6iKCAhApib0oDaOuLdx/yLmL3D8rGqo2ExRMlTFKvZ4yqrGjoc+qSI653Cd/fMNp1MbLxhZbb+gevotSBLUQ7Vw7vdan41VY826wiKJJz0Sea/EIqRRCm+MQe2zzkcggaTAX3XmzM8G+Ncs3l9txZTSIET2Z90YGkSVZ8qS8jsd1jhbaOcpKdBU5Yo8/Ym5rNsMZSQzJHWiwADnnqk8h1yAf97IJ8qEnLCCIA0coZdICpnoeV3b6Yfn123lYYxBSxY2vYEC2vocsVUFnJbEnkVHab6WF6dmx/JTaRDtXbmjR/hllDRolb/NpOsnLAPWuHw/MsTaMrIv2GM6n9VOTWr/XhzKXkE18zU2Q1/5JIFU93b/6AyABarMBgWtvDGof682tZXTak8icquboqXcKk9oI5gEyTKapFx0ZoP3Eh8LOKQvLH8rSKDvhTPSLZXiBnm/Ahs1HCLLg73j1H9EFjyY7lljC5aB5za17UF7SslZMunih0e20t5LvH2/JHAht39guzXQmvzcXHNzTBqoK3Uk3A+NauhWwocPw84i90gZc6yKm3ePf+ctIxeJA4W8ts4XXkQ8ziQSPb8g0mqWlFVX7PgxGdR9kBFrjTRVPNKPMScKRU1n0=
+  file: MAPster_macOS_beta2.4.dmg
