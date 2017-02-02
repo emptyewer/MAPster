@@ -1,9 +1,12 @@
-# MAPster
-[![Code Climate](https://codeclimate.com/repos/589033c7604ae30054000d22/badges/e6a1899ff34e09cf3a23/gpa.svg)](https://codeclimate.com/repos/589033c7604ae30054000d22/feed)
-[![Issue Count](https://codeclimate.com/repos/589033c7604ae30054000d22/badges/e6a1899ff34e09cf3a23/issue_count.svg)](https://codeclimate.com/repos/589033c7604ae30054000d22/feed)
+# MAPster #
+
 A GUI frontend to map NGS sequencing data using HISAT2. 
 
-# Features
+[![Code Climate](https://codeclimate.com/repos/589033c7604ae30054000d22/badges/e6a1899ff34e09cf3a23/gpa.svg)](https://codeclimate.com/repos/589033c7604ae30054000d22/feed)
+[![Issue Count](https://codeclimate.com/repos/589033c7604ae30054000d22/badges/e6a1899ff34e09cf3a23/issue_count.svg)](https://codeclimate.com/repos/589033c7604ae30054000d22/feed)
+
+##  Features ##
+
 * Dynamic queuing to add mapping jobs on the fly
 * Presets for processing: Genomic, RNASeq, shRNA data
 * Loading mapping parameters from previous mapping runs
@@ -11,16 +14,20 @@ A GUI frontend to map NGS sequencing data using HISAT2.
 * Mapping parameter previews
 * Multi-threading (a HISAT2 feature)
 
-# 3rd party packages
+## 3rd party packages ##
+
 This software includes HISAT2 executable. http://ccb.jhu.edu/software/hisat2/index.shtml
 
-# Screenshot
+## Screenshot ##
+
 ![alt tag](https://raw.githubusercontent.com/emptyewer/MAPster/master/screenshot.png)
 
-# Video
+## Video ##
+
 https://youtu.be/oKzu1-pWKbY
 
-# License
+## License ##
+
 Copyright (c) 2016 Venkatramanan Krishnamani, Robert C. Piper, Mark Stamnes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -41,5 +48,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-# Citation
+## HISAT2 Citation ##
+
 Kim D, Langmead B and Salzberg SL. HISAT: a fast spliced aligner with low memory requirements. Nature Methods 2015
