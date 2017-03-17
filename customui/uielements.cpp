@@ -343,6 +343,7 @@ Parameters UIElements::get_parameters(MainWindow *parent) {
   params.chr = parent->ui->chr->isChecked();
   params.reorder = parent->ui->reorder->isChecked();
   params.mm = parent->ui->mm->isChecked();
+  params.bzip_sam = parent->ui->bzip_sam->isChecked();
   return params;
 }
 
@@ -635,4 +636,5 @@ void UIElements::setDefaults(MainWindow *parent) {
   parent->ui->chr->setChecked(true);
   parent->ui->mm->setChecked(false);
   parent->ui->softclipping->setChecked(true);
+  parent->ui->bzip_sam->setChecked(false);
 }

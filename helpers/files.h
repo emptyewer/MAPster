@@ -24,6 +24,7 @@ public:
   QString get_mapster_output_dir();
   QString get_hisat_executable_path();
   QString get_output_dir();
+  void bzip2_files_mac(QString filename);
   QVector<Genome> get_genomes_list();
   void create_documents_folder();
   void untar_files_mac(Genome g);

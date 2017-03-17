@@ -1430,6 +1430,20 @@
          </widget>
         </item>
         <item>
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="bzip_sam">
+          <property name="text">
+           <string>Bzip SAM files (checking this box will delete the .sam file)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="Line" name="line_17">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -1463,6 +1477,8 @@
        <zorder>line_10</zorder>
        <zorder>line_11</zorder>
        <zorder>line_12</zorder>
+       <zorder>bzip_sam</zorder>
+       <zorder>line_3</zorder>
       </widget>
      </widget>
     </item>

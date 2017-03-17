@@ -61,6 +61,7 @@ struct Parameters {
   bool quiet;
   bool metrics;
   bool chr;
+  bool bzip_sam;
   // Performance options
   bool reorder;
   QStringList args;

@@ -152,13 +152,12 @@ void MainWindow::on_add_to_queue_button_clicked() {
   update_jobs_table();
   if (q->get_jobs_count() > 0) {
     if (!running) {
-        ui->run_button->setEnabled(true);
+      ui->run_button->setEnabled(true);
     }
     if (ui->jobs_table->selectedItems().length() > 0) {
-        ui->clear_queue_button->setEnabled(true);
-    }
-    else {
-        ui->clear_queue_button->setEnabled(false);
+      ui->clear_queue_button->setEnabled(true);
+    } else {
+      ui->clear_queue_button->setEnabled(false);
     }
   }
 }
@@ -204,6 +203,13 @@ void MainWindow::run_next_in_queue() {
         running = true;
       } else if (q->queue.at(current_job).state == 1) {
         if (current_proc->processId() == 0) {
+          if (q->queue.at(current_job).bzip_sam == true) {
+            //            current_proc = f->bzip2_files_mac_proc(
+            //                q->queue.at(current_job).output_filename);
+            //            qDebug() << "Zip Process" << current_proc;
+            //            q->queue[current_job].bzip_sam = false;
+            f->bzip2_files_mac(q->queue.at(current_job).output_filename);
+          }
           q->update_state(current_job, 2);
           current_job += 1;
         }
@@ -227,13 +233,14 @@ void MainWindow::on_clear_queue_button_clicked() {
   ui->jobs_table->removeRow(row);
   q->set_current_index(0);
   if (q->get_jobs_count() == 0) {
-       ui->clear_queue_button->setEnabled(false);
-       ui->parameter_table->clear();
-       ui->command_line->clear();
-  }
-  else if (ui->jobs_table->selectedItems().length() > 0) {
-      UIElements().update_params_table(this, q->get_parameters(ui->jobs_table->row(ui->jobs_table->selectedItems().at(0))));
-      ui->clear_queue_button->setEnabled(true);
+    ui->clear_queue_button->setEnabled(false);
+    ui->parameter_table->clear();
+    ui->command_line->clear();
+  } else if (ui->jobs_table->selectedItems().length() > 0) {
+    UIElements().update_params_table(
+        this, q->get_parameters(
+                  ui->jobs_table->row(ui->jobs_table->selectedItems().at(0))));
+    ui->clear_queue_button->setEnabled(true);
   }
 }
 
@@ -357,7 +364,7 @@ void MainWindow::on_softclipping_stateChanged(int arg1) {
 void MainWindow::on_jobs_table_clicked(const QModelIndex &index) {
   UIElements().update_params_table(this, q->get_parameters(index.row()));
   if (ui->jobs_table->selectedItems().length() > 0) {
-        ui->clear_queue_button->setEnabled(true);
+    ui->clear_queue_button->setEnabled(true);
   }
 }
 
@@ -464,7 +471,6 @@ void MainWindow::on_preferences_clicked() {
 
 void MainWindow::on_quit_current_job_button_clicked() { q->quit_current_job(); }
 
-void MainWindow::on_reference_dir_clicked()
-{
+void MainWindow::on_reference_dir_clicked() {
   QProcess::startDetached("open " + f->get_mapster_genomes_dir());
 }

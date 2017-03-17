@@ -107,6 +107,23 @@ void Files::untar_files_mac(Genome g) {
   system(remove_str.c_str());
 }
 
+void Files::bzip2_files_mac(QString filename) {
+  QString output_name = filename + ".tar.bz2";
+  output_name =
+      QDir(get_output_dir()).filePath(output_name).replace(" ", "\\ ");
+  QString input_name = filename.replace(" ", "\\ ");
+  QString command =
+      "tar cvjf " + output_name + " -C " + get_output_dir() + " " + input_name;
+  string command_str = command.toStdString();
+  qDebug() << command;
+  system(command_str.c_str());
+  QString remove =
+      "rm -f " +
+      QDir(get_output_dir()).filePath(input_name).replace(" ", "\\ ");
+  string remove_str = remove.toStdString();
+  system(remove_str.c_str());
+}
+
 void Files::extract(const char *filename) {
   struct archive *a = NULL;
   struct archive_entry *entry = NULL;
